@@ -12,9 +12,11 @@ client.on("message", (message) => {
   }
 	if (message.content.includes("date")) {
    now=new Date();
+	message.channel.send("ok");	
   }
 if (message.content.includes("now")) {
      message.channel.send(now);
+	message.channel.send("ok1");
   }
 
 });
