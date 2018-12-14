@@ -21,4 +21,4 @@ if (message.content.includes("now")) {
 
 });
  
-client.login("NTE5MTg2ODg1MzMxOTEwNjc2.DubuRw.rptFN8SW1PJBcdTEIAvZXhN17Zk");
+client.login(process.env.TOKEN);
