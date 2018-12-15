@@ -1,6 +1,6 @@
 {
     "servers": ["471630590806851584"],
     "roleName": "Rainbow",
-    "speed": 10000,
+    "speed": 100000,
     "logging": true
 }

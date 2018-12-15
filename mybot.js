@@ -28,10 +28,7 @@ const servers = config.servers;
 
 function changeColor() {
 for (let index = 0; index < servers.length; ++index) {
-var g=(Math.random()*1000)%255;
-var r=(Math.random()*1000)%255;
-var b=(Math.random()*1000)%255;
-var zet='#'+to_hex(g)+to_hex(r)+to_hex(b);
+var zet='#'+((Math.random()*10000000000)%16777216).toString(16);
 client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet)
     .catch(console.error);
  
