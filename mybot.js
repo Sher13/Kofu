@@ -10,6 +10,9 @@ client.on("message", (msg) => {
   if (msg.content.startsWith("ping")) {
     msg.channel.send("pong!");
   }
+if (msg.content.startsWith("ch")) {
+    changeColor();
+  }
 	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
    msg.delete();
    msg.reply("***bad words are disable in server***:rage:");
