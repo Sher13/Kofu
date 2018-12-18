@@ -13,7 +13,6 @@ client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(z
 if(config.logging){
 console.log(`[ColorChanger] Changed color to ${zet} in server: ${servers[index]}`);
 }
-
 }
 }
  
