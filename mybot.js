@@ -4,7 +4,18 @@ const client = new Discord.Client();
 client.on("ready", () => {
   console.log("I am ready!");
 });
-var now;
+function changeColor() {
+for (let index = 0; index < servers.length; ++index) {
+var zet='#'+((Math.random()*10000000000)%16777216).toString(16);
+client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet)
+    .catch(console.error);
+ 
+if(config.logging){
+console.log(`[ColorChanger] Changed color to ${zet} in server: ${servers[index]}`);
+}
+
+}
+}
  
 client.on("message", (msg) => {
   if (msg.content.startsWith("ping")) {
@@ -30,18 +41,7 @@ return hex.length === 1 ? '0'+hex : hex;
 
 const servers = config.servers;
 
-function changeColor() {
-for (let index = 0; index < servers.length; ++index) {
-var zet='#'+((Math.random()*10000000000)%16777216).toString(16);
-client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet)
-    .catch(console.error);
- 
-if(config.logging){
-console.log(`[ColorChanger] Changed color to ${zet} in server: ${servers[index]}`);
-}
 
-}
-}
 
 
 client.on('ready', () => {
