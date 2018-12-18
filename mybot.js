@@ -12,6 +12,7 @@ client.on("message", (msg) => {
   }
 if (msg.content.startsWith("ch")) {
     changeColor();
+	msg.channel.send("ok:ok_hand: :wink: ");
   }
 	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
    msg.delete();
