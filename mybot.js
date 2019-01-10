@@ -27,8 +27,10 @@ if (msg.content.startsWith("ch")) {
 var o =msg.author.id;
 if (msg.content.includes("<@204590199932452864>"))
 	msg.channel.send("Ужасный ужасный человек. Забудь его ник")
-if (msg.content.includes("Вообще")&&o=="532969529857409063")
+if (msg.content.startsWith("Вообще")&&o=="532969529857409063")
 	msg.channel.send("Ну такоооое. А ты знал, что он садист?")
+if (msg.content.startsWith("А ты слышала, что он говорил об этом? Это только эстетика, а не то, без чего нельзя жить!")&&o=="532969529857409063")
+	msg.channel.send("Меня пугает твоя осведомленность в данном вопросе :thinking: ")
 	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
    msg.delete();
    msg.reply("***bad words are disable in server***:rage:");
