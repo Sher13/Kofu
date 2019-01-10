@@ -24,6 +24,8 @@ if (msg.content.startsWith("ch")) {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
+if (msg.content.includes("Вообще то он классный!!!"))
+	msg.channel.send("Ну такоооое. А ты знал, что он садист?")
 if (msg.content.includes("<@204590199932452864>"))
 	msg.channel.send("Ужасный ужасный человек. Забудь его ник")
 	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
