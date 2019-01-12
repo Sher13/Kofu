@@ -20,7 +20,7 @@ client.on("message", (msg) => {
   if (msg.content.startsWith("ping")) {
     msg.channel.send("pong!");
   }
-if (msg.content=="ch") {
+if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
