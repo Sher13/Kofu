@@ -7,7 +7,7 @@ const client = new Discord.Client();
 	var ans="";
 	for(var i=0;i<n;i++)
 		{
-			ans+=toString(s[i].charCodeAt())+" ";
+			ans+=s[i].charCodeAt()+" ";
 		}
 	return ans;
 }
@@ -36,7 +36,7 @@ if (msg.content==="ch") {
   }
 if (msg.content.includes("char "))
 	{
-		var mess=msg.content.substring(msg.content.indexOf("char ")+4);
+		var mess=msg.content.substring(msg.content.indexOf("char ")+5);
 		var e=per(mess);
 		msg.reply(e);
 	}
