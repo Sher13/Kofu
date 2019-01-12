@@ -34,9 +34,9 @@ if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
-if (msg.content.includes("char"))
+if (msg.content.includes(" char"))
 	{
-		var mess=msg.content.substring(0,msg.content.indexOf("char"));
+		var mess=msg.content.substring(0,msg.content.indexOf(" char"));
 		var e=per(mess);
 		msg.reply(e);
 	}
