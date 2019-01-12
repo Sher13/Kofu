@@ -1,6 +1,16 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+ function per(s)
+{
+	var n=s.length;
+	var ans="";
+	for(var i=0;i<n;i++)
+		{
+			ans+=s[i].charCodeAt()+" ";
+		}
+	return ans;
+}
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -24,6 +34,12 @@ if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
+if (msg.content.includes("char "))
+	{
+		var mess=msg.content.substring(0,msg.content.indexOf("char "));
+		var e=per(mess);
+		msg.reply(e);
+	}
 var o =msg.author.id;
 /*if (msg.content.includes("<@204590199932452864>"))
 	msg.channel.send("Ужасный ужасный человек. Забудь его ник")
