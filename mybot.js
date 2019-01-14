@@ -83,7 +83,7 @@ if (fl==1&&o==id&&us.presence.status=="offline"&&msg.content.includes("<@4659318
 			{
 				var emb = {
 					embed: {
-					title: "**Аля ушла спать. Она уже скучает. А вообще иди спать** :heart: ",
+					title: "**Аля ушла спать. Она уже скучает. А вообще тебе тоже пора спать** :heart: ",
 					color:"14614685",
 					image:
 						{
