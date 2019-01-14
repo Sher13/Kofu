@@ -42,12 +42,6 @@ if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
-if (msg.content.includes(" char"))
-	{
-		var mess=msg.content.substring(0,msg.content.indexOf(" char"));
-		var e=per(mess);
-		msg.reply(e);
-	}
 var o =msg.author.id;
 	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
    msg.delete();
@@ -107,11 +101,11 @@ if (msg.content.includes("скушать <@465931840398557194>"))
 					};
 				setTimeout(function (){msg.channel.send(emb)},2000);
 	}
-	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой"))
+	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер Злой"))
 	{
 		var emb = {
 					embed: {
-					title: "**Ня. Вот не будь злым. Кушай**\n ",
+					title: "**Ня. Вот не будь злым. Кушай.**\n ",
 					color:"14614685",
 					image:
 						{
