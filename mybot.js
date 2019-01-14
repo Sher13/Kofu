@@ -64,11 +64,11 @@ if (fl==1&&o==id&&us.presence.status=="offline"&&msg.content.includes("<@4659318
 		var data=new Date(dt.now())+"";
 		var tm=data.substring(16,18);
 		console.log(tm);
-		if (tm>=8&&tm<20)
+		if (tm>=5&&tm<17)
 			{
 				var emb = {
 					embed: {
-					title: tm+ " **Скорее всего Аля сейчас на учебе. Ей очень скучно, но видимо сейчас важная пара**",
+					title:" **Скорее всего Аля сейчас на учебе. Ей очень скучно, но видимо сейчас важная пара**",
 					color:"14614685",
 					image:
 						{
