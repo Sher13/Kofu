@@ -1,7 +1,6 @@
 {
   "name": "Kofu",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +9,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2"
-  }
+    "discord.js": "^11.4.2",
+    "node-datetime": "^2.1.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sher13/Kofu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sher13/Kofu/issues"
+  },
+  "homepage": "https://github.com/Sher13/Kofu#readme",
+  "description": ""
 }
