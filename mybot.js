@@ -101,7 +101,7 @@ if (msg.content.includes("скушать <@465931840398557194>"))
 					};
 				setTimeout(function (){msg.channel.send(emb)},2000);
 	}
-	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер Злой"))
+	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер злой"))
 	{
 		var emb = {
 					embed: {
