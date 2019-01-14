@@ -1,10 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const { Client, RichEmbed } = require('discord.js');
 const fs = require("fs")
 var cin = fs.readFileSync("file.txt", "utf8");
 const config = require('./config.json');
-
 var dateTime = require('node-datetime');
 var fl=cin;
 function flag(){
