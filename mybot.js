@@ -57,7 +57,7 @@ var rus="204590199932452864";
 var us=client.users.get(id);
 var o =msg.author.id;
 setInterval(flag, config.kuc);
-if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
+/*if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
 	{
 		msg.reply("Мне жаль. Аля сейчас офлайн");
 		var dt = dateTime.create();
@@ -94,7 +94,7 @@ if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931
 				msg.channel.send(emb);
 			}
 		fl=0;
-	}
+	}*/
 if (msg.content.includes("скушать <@465931840398557194>"))
 	{
 		var emb = {
