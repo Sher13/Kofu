@@ -63,6 +63,7 @@ if (fl==1&&o==id&&us.presence.status=="offline"&&msg.content.includes("<@4659318
 		var dt = dateTime.create();
 		var data=new Date(dt.now())+"";
 		var tm=data.substring(16,18);
+		console.log(tm);
 		if (tm>=8&&tm<20)
 			{
 				var emb = {
