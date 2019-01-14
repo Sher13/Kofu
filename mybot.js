@@ -58,12 +58,9 @@ var o =msg.author.id;
 var id="465931840398557194";
 var rus="204590199932452864";
 var us=client.users.get(id);
-var o =msg.author.id;
-setInterval(flag, config.kuc);
 if (fl==1&&o==id&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
 	{
 		msg.reply("Мне жаль. Аля сейчас офлайн");
-		//Mon Jan 14 2019 18:51:02 GMT+0300 (GMT+03:00)
 		var dt = dateTime.create();
 		var data=new Date(dt.now())+"";
 		var tm=data.substring(16,18);
@@ -139,6 +136,7 @@ client.on('ready', () => {
 console.log(`Logged in as ${client.user.username}!`);
 if(config.speed < 10){console.log("The minimum speed is 60.000, if this gets abused your bot might get IP-banned"); process.exit(1);}
 setInterval(changeColor, config.speed);
+setInterval(flag, config.kuc);
 });
 fs.writeFileSync("file.txt", fl) ; 
 client.login(process.env.TOKEN);
