@@ -1,5 +1,5 @@
+const Discord = require("discord.js");
 const client = new Discord.Client();
-const { Client, RichEmbed } = require('discord.js');
 const fs = require("fs")
 var cin = fs.readFileSync("file.txt", "utf8");
 const config = require('./config.json');
@@ -48,12 +48,6 @@ if (msg.content.includes(" char"))
 		var e=per(mess);
 		msg.reply(e);
 	}
-if (msg.content.includes("<@204590199932452864>"))
-	msg.channel.send("Ужасный ужасный человек. Забудь его ник")
-if (msg.content=="Вообще то он классный!!!"&&o=="532969529857409063")
-	msg.channel.send("Ну такоооое. А ты знал, что он садист?")
-if (msg.content=="А ты слышала, что он говорил об этом? Это только эстетика, а не то, без чего нельзя жить!"&&o=="532969529857409063")
-	msg.channel.send("Меня пугает твоя осведомленность в данном вопросе :thinking: ")
 	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
    msg.delete();
    msg.reply("***bad words are disable in server***:rage:");
@@ -66,7 +60,6 @@ setInterval(flag, config.kuc);
 if (fl==1&&o==id&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
 	{
 		msg.reply("Мне жаль. Аля сейчас офлайн");
-		//Mon Jan 14 2019 18:51:02 GMT+0300 (GMT+03:00)
 		var dt = dateTime.create();
 		var data=new Date(dt.now())+"";
 		var tm=data.substring(16,18);
@@ -129,6 +122,20 @@ if (msg.content.includes("скушать <@465931840398557194>"))
 					};
 				msg.channel.send(emb);
 	}
+	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер злой"))
+	{
+		var emb = {
+					embed: {
+					title: "**Ня. Вот не будь злым. Кушай.**\n ",
+					color:"14614685",
+					image:
+						{
+							url: "https://cdn.discordapp.com/attachments/534380967130038274/534424030627889152/nya10.gif"
+						}
+					}
+					};
+				msg.channel.send(emb);
+	}
 });
 function to_hex(i) {
 var int = i;
@@ -138,14 +145,11 @@ return hex.length === 1 ? '0'+hex : hex;
 
 const servers = config.servers;
 
-
-
-
 client.on('ready', () => {
 console.log(`Logged in as ${client.user.username}!`);
 if(config.speed < 10){console.log("The minimum speed is 60.000, if this gets abused your bot might get IP-banned"); process.exit(1);}
 setInterval(changeColor, config.speed);
+setInterval(flag, config.kuc);
 });
-
-fs.writeFileSync("file.txt", fl) 
+fs.writeFileSync("file.txt", fl) ; 
 client.login(process.env.TOKEN);
