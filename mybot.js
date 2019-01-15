@@ -56,7 +56,7 @@ var id="465931840398557194";
 var rus="204590199932452864";
 var us=client.users.get(id);
 var o =msg.author.id;
-if (fl==1&&o==id&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
+if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
 	{
 		msg.reply("Мне жаль. Аля сейчас офлайн");
 		var dt = dateTime.create();

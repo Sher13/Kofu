@@ -3,5 +3,5 @@
     "roleName": "Rainbow",
     "speed": 100000,
     "logging": true,
-	"kuc": 10000
+	"kuc": 3600000
 }
