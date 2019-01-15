@@ -2,12 +2,18 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs")
 var cin = fs.readFileSync("file.txt", "utf8");
+var c = fs.readFileSync("f1.txt", "utf8");
+var tl=c;
 const config = require('./config.json');
 var dateTime = require('node-datetime');
 var fl=cin;
 function flag(){
 	fl=1;
 	fs.writeFileSync("file.txt", fl);
+}
+function tli(){
+	tl=1;
+	fs.writeFileSync("f1.txt", tl);
 }
  function per(s)
 {
@@ -56,13 +62,13 @@ var id="465931840398557194";
 var rus="204590199932452864";
 var us=client.users.get(id);
 var o =msg.author.id;
-if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
-	{
-		msg.reply("Мне жаль. Аля сейчас офлайн");
-		var dt = dateTime.create();
+var dt = dateTime.create();
 		var data=new Date(dt.now())+"";
 		var tm=data.substring(16,18);
 		console.log(tm);
+if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
+	{
+		msg.reply("Мне жаль. Аля сейчас офлайн");
 		if (tm>=5&&tm<17)
 			{
 				var emb = {
@@ -94,6 +100,26 @@ if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931
 			}
 		fl=0;
 	}
+if ((tm>=18||tm<=2)&&us.presence.status!="offline"&&tl==1&&o==id)
+			{
+				msg.reply('ok');
+				var s = ["Куцкер иди спать, ты опять убиваешь свой режим.", "Руслан, я знаю, что в глубине души ты хочешь спать.", "Кодинг это не главное в жизни. Спать намного лучше. ", "Возможно, именно в этот момент, ты соберешься и пойдешь спать. Поверь мне это круто", "Сон не для слабаков"];
+				var r=Math.round((Math.random()*1000))%5;
+				msg.channel.send(r+" "+s[r]+" ");
+				var emb = {
+					embed: {
+					title:"**"+s[r]+"**",
+					color:"14614685",
+					image:
+						{
+							url: "https://cdn.discordapp.com/attachments/534380967130038274/534471005150642176/nya14.gif"
+						}
+					}
+					};
+				msg.channel.send(emb);
+				tl=0;
+				fs.writeFileSync("f1.txt", tl);
+			}
 if (msg.content.includes("скушать <@465931840398557194>"))
 	{
 		var emb = {
@@ -136,6 +162,7 @@ console.log(`Logged in as ${client.user.username}!`);
 if(config.speed < 10){console.log("The minimum speed is 60.000, if this gets abused your bot might get IP-banned"); process.exit(1);}
 setInterval(changeColor, config.speed);
 setInterval(flag, config.kuc);
+setInterval(tli, config.kr);
 });
 fs.writeFileSync("file.txt", fl) ; 
 client.login(process.env.TOKEN);
