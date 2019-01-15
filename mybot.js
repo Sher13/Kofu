@@ -56,8 +56,7 @@ var id="465931840398557194";
 var rus="204590199932452864";
 var us=client.users.get(id);
 var o =msg.author.id;
-setInterval(flag, config.kuc);
-/*if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
+if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931840398557194>"))
 	{
 		msg.reply("Мне жаль. Аля сейчас офлайн");
 		var dt = dateTime.create();
@@ -94,7 +93,7 @@ setInterval(flag, config.kuc);
 				msg.channel.send(emb);
 			}
 		fl=0;
-	}*/
+	}
 if (msg.content.includes("скушать <@465931840398557194>"))
 	{
 		var emb = {
@@ -108,20 +107,6 @@ if (msg.content.includes("скушать <@465931840398557194>"))
 					}
 					};
 				setTimeout(function (){msg.channel.send(emb)},2000);
-	}
-	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой"))
-	{
-		var emb = {
-					embed: {
-					title: "**Ня. Вот не будь злым. Кушай**\n ",
-					color:"14614685",
-					image:
-						{
-							url: "https://cdn.discordapp.com/attachments/534380967130038274/534424030627889152/nya10.gif"
-						}
-					}
-					};
-				msg.channel.send(emb);
 	}
 	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер злой"))
 	{
