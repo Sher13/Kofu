@@ -100,7 +100,7 @@ if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931
 			}
 		fl=0;
 	}
-if ((tm>14||tm<=2)&&us.presence.status!="offline"&&tl==1&&o==id)
+/*if ((tm>14||tm<=2)&&us.presence.status!="offline"&&tl==1&&o==id)
 			{
 				msg.reply('ok');
 				var s = ["Куцкер иди спать, ты опять убиваешь свой режим.", "Руслан, я знаю, что в глубине души ты хочешь спать.", "Кодинг это не главное в жизни. Спать намного лучше. ", "Возможно, именно в этот момент, ты соберешься и пойдешь спать. Поверь мне это круто", "Сон не для слабаков"];
@@ -119,7 +119,7 @@ if ((tm>14||tm<=2)&&us.presence.status!="offline"&&tl==1&&o==id)
 				msg.channel.send(emb);
 				tl=0;
 				fs.writeFileSync("f1.txt", tl);
-			}
+			}*/
 if (msg.content.includes("скушать <@465931840398557194>"))
 	{
 		var emb = {
