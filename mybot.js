@@ -38,6 +38,7 @@ var f=client.channels.get("535391187411140608");
 	f.send(zet);
 		var emb = {
 					embed: {
+					title:zet,
 					color:kl
 					}
 					};
