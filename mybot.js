@@ -30,10 +30,19 @@ client.on("ready", () => {
 });
 function changeColor() {
 for (let index = 0; index < servers.length; ++index) {
-var zet='#'+((Math.random()*10000000000)%16777216).toString(16);
+var kl=(Math.round((Math.random()*10000000000))%16777216);
+var zet='#'+kl.toString(16);
 client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet)
     .catch(console.error);
- 
+var f=client.channels.get("535391187411140608");
+	f.send(zet);
+		var emb = {
+					embed: {
+					color:kl
+					}
+					};
+				f.send(emb);
+				
 if(config.logging){
 console.log(`[ColorChanger] Changed color to ${zet} in server: ${servers[index]}`);
 }
