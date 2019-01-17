@@ -35,7 +35,6 @@ var zet='#'+kl.toString(16);
 client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet)
     .catch(console.error);
 var f=client.channels.get("535391187411140608");
-	f.send(zet);
 		var emb = {
 					embed: {
 					title:zet,
