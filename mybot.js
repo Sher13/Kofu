@@ -125,7 +125,8 @@ var ifedle = [
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    if (msg.content.toLowerCase().indexOf('сладких снов') === 0) {
+    if (msg.content.toLowerCase().startsWith('сладких снов')) {
+		
         var embed = new RichEmbed()
         // Set the title of the field
         //.setTitle()
