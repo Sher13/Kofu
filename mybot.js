@@ -109,6 +109,36 @@ if (fl==1&&o==rus&&us.presence.status=="offline"&&msg.content.includes("<@465931
 			}
 		fl=0;
 	}
+var ifedle = [
+        "https://media1.tenor.com/images/78095c007974aceb72b91aeb7ee54a71/tenor.gif?itemid=5095865",
+        "https://media.tenor.com/images/2e7cc2d6a4f39473abc2015fee593b40/tenor.gif",
+        'https://69.media.tumblr.com/eb891f0d3ef2edadd539878c01ec0774/tumblr_ohqd4cfTzn1vmoyzro1_500.gif',
+        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+        "https://69.media.tumblr.com/58782c40408faced4be4738f95e687da/tumblr_mzvivm4cyN1sj63e7o1_500.gif",
+        "https://69.media.tumblr.com/1ae47d6e18225d1395e6a3a25ab6535e/tumblr_nj489xfa4I1u7oqn0o1_400.gif",
+        "https://69.media.tumblr.com/ab355fef4660bf6b1b04df5572068229/tumblr_nzf68mv6HN1satyyro1_500.gif",
+        "https://69.media.tumblr.com/042929284fce471220173a6166c7c3b9/tumblr_ohqe4bCZ621reyllgo1_500.gif",
+        "https://69.media.tumblr.com/04cd98d0cd043c9952ee522949187f47/tumblr_no02veHJNL1uu7scvo1_500.gif"
+    ];
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    if (msg.content.toLowerCase().indexOf('сладких снов') === 0) {
+        var embed = new RichEmbed()
+        // Set the title of the field
+        //.setTitle()
+        // Set the color of the embed
+            .setColor(0x180a05)
+            // Set the main content of the embed
+            .setDescription('<@' + msg.author.id + '> пожелал сладких снов ' + msg.content.substring(msg.content.indexOf("<"), message.content.indexOf(">") + 1) )
+            // Send the embed to the same channel as the message
+            .setImage(ifedle[getRandomInt(0, 7)]);
+
+        msg.reply(embed);
+
+    }
 /*if ((tm>14||tm<=2)&&us.presence.status!="offline"&&tl==1&&o==id)
 			{
 				msg.reply('ok');
