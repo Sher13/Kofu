@@ -132,7 +132,7 @@ var ifedle = [
         // Set the color of the embed
             .setColor(0x180a05)
             // Set the main content of the embed
-            .setDescription('<@' + msg.author.id + '> пожелал сладких снов ' + msg.content.substring(msg.content.indexOf("<"), message.content.indexOf(">") + 1) )
+            .setDescription('<@' + msg.author.id + '> пожелал сладких снов ' + msg.content.substring(msg.content.indexOf("<"), msg.content.indexOf(">") + 1) )
             // Send the embed to the same channel as the message
             .setImage(ifedle[getRandomInt(0, 7)]);
 
