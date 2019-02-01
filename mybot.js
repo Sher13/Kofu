@@ -152,7 +152,7 @@ if (msg.content.includes("скушать <@465931840398557194>"))
             .setDescription('<@' + msg.author.id + '> укусил ' + msg.content.substring(msg.content.indexOf("<"), msg.content.indexOf(">") + 1) )
  		.setImage("https://cdn.discordapp.com/attachments/534380967130038274/541017392021635072/8e352a6a1ef64e8b3a6bc16d8783949e.gif");
 
-        msg.reply(embed);
+        msg.channel.send(embed);
 	 }
 	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер злой"))
 	{
