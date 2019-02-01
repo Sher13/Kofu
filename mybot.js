@@ -145,6 +145,20 @@ if (msg.content.includes("скушать <@465931840398557194>"))
 					};
 				setTimeout(function (){msg.channel.send(emb)},2000);
 	}
+ if (msg.content==="кусь")
+	 {
+		var emb = {
+					embed: {
+					title: "<@"+o+">\n ",
+					color:"14614685",
+					image:
+						{
+							url: "https://cdn.discordapp.com/attachments/534380967130038274/541017392021635072/8e352a6a1ef64e8b3a6bc16d8783949e.gif"
+						}
+					}
+					};
+				msg.channel.send(emb); 
+	 }
 	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер злой"))
 	{
 		var emb = {
