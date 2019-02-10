@@ -16,16 +16,7 @@ function tli(){
 	tl=1;
 	fs.writeFileSync("f1.txt", tl);
 }
- function per(s)
-{
-	var n=s.length;
-	var ans="";
-	for(var i=0;i<n;i++)
-		{
-			ans+=s[i].charCodeAt()+" ";
-		}
-	return ans;
-}
+
 client.on("ready", () => {
   console.log("I am ready!");
 });
@@ -57,16 +48,6 @@ client.on("message", (msg) => {
 if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
-  }
-if (msg.content.includes(" char"))
-	{
-		var mess=msg.content.substring(0,msg.content.indexOf(" char"));
-		var e=per(mess);
-		msg.reply(e);
-	}
-	 if(msg.content.includes("wtf")||(msg.content.includes("fuck"))||(msg.content.includes("bitch"))){
-   msg.delete();
-   msg.reply("***bad words are disable in server***:rage:");
   }
 var id="465931840398557194";
 var rus="204590199932452864";
