@@ -156,7 +156,7 @@ if (msg.content.includes("скушать <@465931840398557194>"))
                  "Но все равно\\n" +
                  "С Днём Святого Валентина <a:nya:526499575817699348>\\n")
              .setImage("https://cdn.discordapp.com/attachments/534380967130038274/545324592055713812/ZPVPz_CObDpnH08hnJF81OfXLbu4yKz7EE0wsUNM1bMSfvzZxnO9aMgYx42P8NEhbE81Wqt--0WU8E5ikb_JgXaqYDPJv6PWcm1Q.gif");
-
+		msg.channel.send(embed);
      }
 	if (msg.content.includes("Куцкер злой")||msg.content.includes("Куцкер Злой")||msg.content.includes("куцкер Злой")||msg.content.includes("куцкер злой"))
 	{
