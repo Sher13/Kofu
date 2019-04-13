@@ -66,6 +66,7 @@ if (msg.content.startsWith("pick"))
 			messages => {
     		messages.first().react(em_id);
 			})
+			
 		}
 });
 
