@@ -55,7 +55,7 @@ if (msg.content.startsWith("pick"))
 			var m_id=text.substring(0,p1);
 			text=text.substring(p1+1);
 			var em_id=text;
-			if (text.length>6)
+			if (text.startsWith('<'))
 				{
 					p1=text.indexOf(':');
 					text=text.substring(p1+1);
