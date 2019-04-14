@@ -68,7 +68,7 @@ if (msg.content.startsWith("pick"))
     		messages.first().react(em_id);
 			})
 		}
-	if (msg.content.startsWith("\h"))
+	if (msg.content.startsWith("-h"))
 		{
 			msg.react("➕"); 
 			msg.react("➖");
