@@ -69,8 +69,7 @@ if (msg.content.startsWith("pick"))
 			messages => {
 				if (messages.first())
 					{
-						console.log(1);
-						messages.first().react(em_id);
+						messages.first().react(em_id).catch(msg.reply("**ERROR!!**"));
 					}else
 				msg.reply("**ERROR!!**");
 			})
