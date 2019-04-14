@@ -65,7 +65,7 @@ if (msg.content.startsWith("pick"))
 				}
 			client.channels.get(ch_id).fetchMessages({around: m_id, limit: 1}).then(
 			messages => {
-    		messages.first().react(em_id);
+    		messages.first().react(em_id).catch(console.error);
 			})
 		}
 	if (msg.content.startsWith("-h"))
