@@ -63,18 +63,14 @@ if (msg.content.startsWith("pick"))
 					p1=text.indexOf(':');
 					em_id=text.substring(p1+1,text.length-1);
 				}
-			if (client.channels.get(ch_id))
-			{
+			try{
 				client.channels.get(ch_id).fetchMessages({around: m_id, limit: 1}).then(
-			messages => {
-				if (messages.first())
-					{
-						messages.first().react(em_id).catch(msg.reply("**ERROR!!**"));
-					}else
-				msg.reply("**ERROR!!**");
+			messages => { messages.first().react(em_id);
 			})
-			} else
-				msg.reply("**ERROR!!**");
+			} catch(e)
+				{
+					msg.reply("**ERROR!!**");
+				}
 			msg.delete();
 		}
 	if (msg.content.startsWith("-h"))
