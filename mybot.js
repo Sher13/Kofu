@@ -70,6 +70,7 @@ if (msg.content.startsWith("pick"))
 				if (messages.first())
 					{
 						messages.first().react(em_id).catch(msg.reply("**ERROR!!**"));
+						msg.delete();
 					}else
 				msg.reply("**ERROR!!**");
 			})
