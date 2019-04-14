@@ -46,6 +46,7 @@ if (msg.content==="ch") {
   }
 if (msg.content.startsWith("pick"))
 		{
+			
 			var p1=msg.content.indexOf(' ');
 			var text=msg.content.substring(p1+1);
 			p1=text.indexOf(' ');
@@ -62,11 +63,15 @@ if (msg.content.startsWith("pick"))
 					p1=text.indexOf(':');
 					em_id=text.substring(p1+1,text.length-1);
 				}
-			
 			client.channels.get(ch_id).fetchMessages({around: m_id, limit: 1}).then(
 			messages => {
     		messages.first().react(em_id);
 			})
+		}
+	if (msg.content.startsWith("/h"))
+		{
+			msg.react("➕"); 
+			msg.react("➖");
 		}
 });
 
