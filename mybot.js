@@ -19,8 +19,7 @@ function changeColor() {
 for (let index = 0; index < servers.length; ++index) {
 var kl=(Math.round((Math.random()*10000000000))%16777216);
 var zet='#'+kl.toString(16);
-client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet)
-    .catch(console.error);
+client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet);
 var f=client.channels.get("535391187411140608");
 		var emb = {
 					embed: {
@@ -30,9 +29,6 @@ var f=client.channels.get("535391187411140608");
 					};
 				f.send(emb);
 				
-if(config.logging){
-console.log(`[ColorChanger] Changed color to ${zet} in server: ${servers[index]}`);
-}
 }
 }
  
@@ -83,8 +79,7 @@ if (msg.content.startsWith("pick"))
 const servers = config.servers;
 
 client.on('ready', () => {
-console.log(`Logged in as ${client.user.username}!`);
-if(config.speed < 10){console.log("The minimum speed is 60.000, if this gets abused your bot might get IP-banned"); process.exit(1);}
+
 setInterval(changeColor, config.speed);
 });
 client.login(process.env.TOKEN);
