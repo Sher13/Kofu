@@ -43,7 +43,7 @@ function vivi(){
 			  "Пам парам. Я пришла, когда не ждали)\nИ я принесла тебе фоточку. Наслаждайся))"];
 	var w=(Math.round(Math.random()*say.length))%say.length;
 	var f = client.channels.get("571749559689019408");
-	f.send(say[w]+v[e]);
+	f.send(say[w]+"\n"+v[e]);
 }
 client.on("message", (msg) => {
   if (msg.content.startsWith("ping")) {
