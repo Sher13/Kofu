@@ -100,7 +100,7 @@ const servers = config.servers;
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);
-	setInterval(vivi,14400000);
+	setInterval(vivi,86400000);
 });
 
 client.login(process.env.TOKEN);
