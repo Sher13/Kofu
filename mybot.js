@@ -36,7 +36,6 @@ function changeColor() {
 }
 
 client.on("message", (msg) => {
-<<<<<<< HEAD
   if (msg.content.startsWith("ping")) {
     msg.channel.send("pong!");
   }
@@ -84,51 +83,6 @@ if (msg.content.startsWith("pick"))
 			msg.channel.send(v[e]);
 			msg.delete();
 		}
-=======
-    if (msg.content.startsWith("ping")) {
-        msg.channel.send("pong!");
-    }
-    if (msg.content === "ch") {
-        changeColor();
-        msg.channel.send("ok:ok_hand: :wink: ");
-    }
-    if (msg.content.startsWith("pick")) {
-
-        var p1 = msg.content.indexOf(' ');
-        var text = msg.content.substring(p1 + 1);
-        p1 = text.indexOf(' ');
-        var ch_id = text.substring(0, p1);
-        text = text.substring(p1 + 1);
-        p1 = text.indexOf(' ');
-        var m_id = text.substring(0, p1);
-        text = text.substring(p1 + 1);
-        var em_id = text;
-        if (text.startsWith('<')) {
-            p1 = text.indexOf(':');
-            text = text.substring(p1 + 1);
-            p1 = text.indexOf(':');
-            em_id = text.substring(p1 + 1, text.length - 1);
-        }
-        try {
-            client.channels.get(ch_id).fetchMessages({
-                around: m_id,
-                limit: 1
-            }).then(
-                messages => {
-                    messages.first().react(em_id);
-                })
-        } catch (e) {
-            msg.reply("**ERROR!!**");
-        }
-        msg.delete();
-    }
-   if (msg.content=="v")
-	   {
-		   var e=(Math.round(Math.random()*(v.length+5)))%v.length;
-		   msg.channel.send(v[e]);
-		   msg.delete();
-		   
-	   }
 });
 
 const servers = config.servers;
