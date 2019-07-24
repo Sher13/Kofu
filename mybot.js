@@ -34,7 +34,6 @@ function changeColor() {
 
     }
 }
-var fr=1;
 function vivi(){
 	var e=(Math.round(Math.random()*v.length))%v.length;
 	var say =["Няп.\nТы возможно расстроен, но вот тебе Виктор и он шикарен.\nУлыбнись",
@@ -100,7 +99,10 @@ const servers = config.servers;
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);
-	setInterval(vivi,86400000);
+	setTimeout(function run() {
+  vivi();
+  setTimeout(run, (Math.round(Math.random*10)+1)*14400000);
+}, 14400000);
 });
 
 client.login(process.env.TOKEN);
