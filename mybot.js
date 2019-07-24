@@ -101,11 +101,8 @@ const servers = config.servers;
 client.on('ready', () => {
 
     setInterval(changeColor, config.speed);
-	setTimeout(function run() {
-  vivi();
-  fr=Math.round(Math.random*10+2)*14400000;
-  setTimeout(run, fr);
-}, 14400000);
+	setInterval(vivi,14400000);
+ setInterval
 });
 
 client.login(process.env.TOKEN);
