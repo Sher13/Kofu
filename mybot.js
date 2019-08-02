@@ -21,6 +21,7 @@ var v=['https://cdn.discordapp.com/attachments/471630590806851586/60333390098228
 function changeColor() {
 	var kl = (Math.round((Math.random() * 10000000000)) % 16777216);
     var zet = '#' + kl.toString(16);
+	
     for (let index = 0; index < servers.length; ++index) {
         client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet);
     }
@@ -85,7 +86,7 @@ if (msg.content.startsWith("pick"))
 		}
 });
 
-const servers = config.servers;
+const servers = ["381829822982389771","471630590806851584"];
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);});
