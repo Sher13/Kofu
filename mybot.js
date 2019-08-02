@@ -34,17 +34,7 @@ function changeColor() {
 
     }
 }
-function vivi(){
-	var e=(Math.round(Math.random()*v.length))%v.length;
-	var say =["Няп.\nТы возможно расстроен, но вот тебе Виктор и он шикарен.\nУлыбнись",
-			  "Хэй, хэй, хэй\nТы конечно можешь думать, что хочешь, но я тебя люблю и забочусь.\nНе унывай ^~^",
-			  "Приветики, как дела?\nОпять грустишь?\nНе грусти!\nБанально, но все же.",
-			  "Шеееер. Я скучаю по тебе. Почему ты так редко приходишь?\n",
-			  "Пам парам. Я пришла, когда не ждали)\nИ я принесла тебе фоточку. Наслаждайся))"];
-	var w=(Math.round(Math.random()*say.length))%say.length;
-	var f = client.channels.get("571749559689019408");
-	f.send(say[w]+"\n"+v[e]);
-}
+
 client.on("message", (msg) => {
   if (msg.content.startsWith("ping")) {
     msg.channel.send("pong!");
@@ -99,6 +89,5 @@ const servers = config.servers;
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);
-	setInterval(vivi,86400000);
 
 client.login(process.env.TOKEN);
