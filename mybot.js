@@ -78,7 +78,7 @@ if (msg.content.startsWith("pick"))
 			msg.react("➕"); 
 			msg.react("➖");
 		}
-	if (msg.content==="v")
+	if (msg.content==="vi")
 		{
 			var e=Math.round(Math.random()*v.length);
 			msg.channel.send(v[e]);
