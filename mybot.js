@@ -84,6 +84,11 @@ if (msg.content.startsWith("pick"))
 			msg.channel.send(v[e]);
 			msg.delete();
 		}
+	if (msg.content=="leave"&&msg.author.id=="465931840398557194")
+		{
+			 msg.channel.send("Goodbay :wave: ")
+			 setTimeout(function(){msg.guild.leave()},100);
+		}
 });
 
 const servers = ["381829822982389771","471630590806851584"];
