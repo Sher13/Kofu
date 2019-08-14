@@ -6,7 +6,8 @@ const {
 } = require('discord.js');
 const fs = require("fs")
 const config = require('./config.json');
-
+const sqlite3 = require('sqlite3').verbose();
+let db = new sqlite3.Database('db/users.db');
 client.on("ready", () => {
     console.log("I am ready!");
     client.user.setPresence({
@@ -35,8 +36,27 @@ function changeColor() {
         f.send(emb);
 
 }
-
+function nw(v)
+{
+	let sql="INSERT INTO Users(id_d) VALUES ("+v+")";
+		db.run(sql);			
+}
+function add(v)
+{
+	var f=2;
+	let sql="SELECT points FROM Users WHERE id_d= ?"
+			let id_d=v;
+    		db.get(sql, [id_d], (err, row) => {
+				return row
+					? f=2
+					: nw(v);
+			});
+	f=Math.floor(Math.random()*10+5);
+	let r="UPDATE Users SET points=points+"+f+" WHERE id_d="+v;
+	db.run(r);
+}
 client.on("message", (msg) => {
+  add(msg.author.id);
   if (msg.content.startsWith("ping")) {
     msg.channel.send("pong!");
   }
@@ -89,6 +109,36 @@ if (msg.content.startsWith("pick"))
 			 msg.channel.send("Goodbay :wave: ")
 			 setTimeout(function(){msg.guild.leave()},100);
 		}
+	if (msg.content=="cr"&&msg.author.id=="465931840398557194")
+		{
+			 let sql ='CREATE TABLE [Users] ([id] INTEGER NOT NULL PRIMARY KEY,[id_d] VARCHAR(30),[points] INTEGER DEFAULT 0)';
+			db.run(sql);
+    	}
+	if (msg.content=="get")
+		{
+			var f=0;
+			let sql="SELECT points FROM Users WHERE id_d= ?"
+			let id_d=msg.author.id;
+    		db.get(sql, [id_d], (err, row) => {
+				return row
+					? f=row.points
+					: msg.reply(`Ууупс, что-то пошло не так. Подожди минутку и попробуй снова :wink: :cherry_blossom: `);
+			});
+			setTimeout(function(){
+				var emb = new RichEmbed()
+            		.setColor(14614685)
+					.setDescription("Ваши баллы: "+f+":cherry_blossom:");
+				msg.reply(emb)},150);
+		}
+	if (msg.content=="ava")
+		{
+			var emb = new RichEmbed()
+            .setColor(14614685)
+ 			.setImage("https://cdn.discordapp.com/avatars/465931840398557194/39b3e573388fa44aeb8164abadefa243.png?size=1024");
+
+        	msg.reply(emb)
+		}
+});
 });
 
 const servers = ["381829822982389771","471630590806851584"];
