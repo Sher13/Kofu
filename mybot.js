@@ -134,7 +134,7 @@ if (msg.content.startsWith("pick"))
 		{
 			var emb = new RichEmbed()
             .setColor(14614685)
- 			.setImage("https://cdn.discordapp.com/avatars/465931840398557194/39b3e573388fa44aeb8164abadefa243.png?size=1024");
+ 			.setImage(msg.author.avatarURL);
 
         	msg.reply(emb)
 		}
