@@ -139,7 +139,6 @@ if (msg.content.startsWith("pick"))
         	msg.reply(emb)
 		}
 });
-});
 
 const servers = ["381829822982389771","471630590806851584"];
 
