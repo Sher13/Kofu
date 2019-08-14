@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "node-datetime": "^2.1.2"
+    "discord.js": "^11.5.1",
+    "node-datetime": "^2.1.2",
+    "sqlite3": "^4.0.9"
   },
   "devDependencies": {},
   "repository": {
