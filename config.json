@@ -5,5 +5,6 @@
     "speed": 100000,
     "logging": true,
 	"kuc":3600000,
-	"kr":900000
+	"kr":900000,
+	"prefix":"_"
 }
