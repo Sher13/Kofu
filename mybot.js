@@ -51,9 +51,6 @@ function add(v)
 	let r="UPDATE Users SET points=points+"+f+" WHERE id_d="+v;
 	db.run(r);
 }
-var q=new Map();
-var d=new Map();
-
 client.on("message", (msg) => {
   add(msg.author.id);
   if (msg.content.startsWith("ping")) {
