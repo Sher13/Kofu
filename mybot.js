@@ -1,11 +1,8 @@
 const discord = require("discord.js");
 const client = new discord.Client();
-const ytdl = require('ytdl-core');
 const fs = require("fs")
 const config = require('./config.json');
-var search = require('youtube-search');
 const sqlite3 = require('sqlite3').verbose();
-const queue = new Map();
 let db = new sqlite3.Database('db/users.db');
 client.on("ready", () => {
     console.log("I am ready!");
