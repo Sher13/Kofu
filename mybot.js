@@ -112,7 +112,7 @@ function get_q(msg,sq)
 {
 	let embed=new Discord.RichEmbed()
 	.setTitle('Queue')
-	.setColor(14614685)
+	.setColor(16648050)
 	for(var i=0;i<Math.min(10,sq.songs.length);i++)
 		{
 			embed.addField(":cherry_blossom: **"+(i+1)+".** "+sq.songs[i].title,"Added by: **"+sq.songs[i].author+"**");
@@ -208,7 +208,10 @@ if (msg.content.startsWith("pick"))
 	if (msg.content==="vi")
 		{
 			var e=Math.round(Math.random()*v.length);
-			msg.channel.send(v[e]);
+			var emb = new RichEmbed()
+            .setColor(16648050)
+ 			.setImage(v[e]);
+			msg.channel.send(emb);
 			msg.delete();
 		}
 	if (msg.content=="leave"&&msg.author.id=="465931840398557194")
@@ -233,14 +236,14 @@ if (msg.content.startsWith("pick"))
 			});
 			setTimeout(function(){
 				var emb = new RichEmbed()
-            		.setColor(14614685)
+            		.setColor(16648050)
 					.setDescription("Ваши баллы: "+f+":cherry_blossom:");
 				msg.reply(emb)},150);
 		}
 	if (msg.content=="ava")
 		{
 			var emb = new RichEmbed()
-            .setColor(14614685)
+            .setColor(16648050)
  			.setImage(msg.author.avatarURL);
 
         	msg.reply(emb)
@@ -263,11 +266,10 @@ if (msg.content.startsWith("pick"))
 	if (msg.content==`${config.prefix}help`)
 		{
 			let embed = new Discord.RichEmbed()
-			.setColor(14614685)
+			.setColor(16648050)
 			.setTitle("Music")
 			.addField(":cherry_blossom: `play` or `p`", "Play url or search a video on youtube.")
 			.addField(":cherry_blossom: `np`", "Shows what is playing right now.")
-			
 			.addField(":cherry_blossom: `queue` or `q`", "Shows the queue.")
 			.addField(":cherry_blossom: `skip` or `s`", "Skips the currently playing song.")
 			.addField(":cherry_blossom: `pause`", "Pause the currently playing song.")
