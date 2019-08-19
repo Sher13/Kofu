@@ -158,7 +158,7 @@ function add(v)
 					? f=2
 					: nw(v);
 			});
-	f=Math.floor(Math.random()*10+5);
+	f=Math.floor(Math.random()*5+5);
 	let r="UPDATE Users SET points=points+"+f+" WHERE id_d="+v;
 	db.run(r);
 }
