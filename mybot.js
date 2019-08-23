@@ -277,6 +277,15 @@ if (msg.content.startsWith("pick"))
 			.addField(":cherry_blossom: `end` or `leave`", "Stop listening to music.")
 			msg.channel.send(embed);
 		}
+	if (msg.content=="Server bumped"&&msg.author.id=="315926021457051650")
+		{
+			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
+		}
+	if (msg.content=="Сервер Up"&&msg.author.id=="464272403766444044")
+		{
+			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
+		}
+	
 });
 
 const servers = ["381829822982389771","471630590806851584"];
