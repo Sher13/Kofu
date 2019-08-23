@@ -45,7 +45,7 @@ function ff(msg,s)
 		return true;
 	if (msg.embeds[0].title&&msg.embeds[0].title.includes(s))
 		return true;
-	if (msg.embeds[0].author.name.includes(s))
+	if (msg.embeds[0].author&&msg.embeds[0].author.name&&msg.embeds[0].author.name.includes(s))
 		return true;
 	for(var i=0;i<msg.embeds[0].fields.length;i++)
 		{
