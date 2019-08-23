@@ -161,12 +161,12 @@ if (msg.content.startsWith("pick"))
 
         	msg.reply(emb)
 		}
-	if (ff(msg,"Server bumped")&&msg.author.id=="315926021457051650")
+	if (msg.author.id=="315926021457051650"&&ff(msg,"Server bumped"))
 		{
 			msg.channel.send("ok");
 			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
 		}
-	if (ff(msg,"Сервер Up")&&msg.author.id=="464272403766444044")
+	if (msg.author.id=="464272403766444044"&&ff(msg,"Сервер Up"))
 		{
 			msg.channel.send("ok");
 			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
