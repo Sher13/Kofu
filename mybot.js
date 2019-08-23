@@ -41,9 +41,9 @@ function changeColor() {
 function ff(msg,s)
 {
 	if (msg.embeds[0]){
-	if (msg.embeds[0].description.includes(s))
+	if (msg.embeds[0].description&&msg.embeds[0].description.includes(s))
 		return true;
-	if (msg.embeds[0].title.includes(s))
+	if (msg.embeds[0].title&&msg.embeds[0].title.includes(s))
 		return true;
 	for(var i=0;i<msg.embeds[0].fields.length;i++)
 		{
