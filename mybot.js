@@ -38,6 +38,24 @@ function changeColor() {
         f.send(emb);
 
 }
+function ff(msg,s)
+{
+	if (msg.embeds[0]){
+	if (msg.embeds[0].description.includes(s))
+		return true;
+	if (msg.embeds[0].title.includes(s))
+		return true;
+	for(var i=0;i<msg.embeds[0].fields.length;i++)
+		{
+			if (msg.embeds[0].fields[i].name.includes(s))
+				return true;
+			if (msg.embeds[0].fields[i].value.includes(s))
+				return true;
+		}
+		return false;
+	} else
+		return false;
+}
 function nw(v)
 {
 	let sql="INSERT INTO Users(id_d) VALUES ("+v+")";
@@ -143,12 +161,12 @@ if (msg.content.startsWith("pick"))
 
         	msg.reply(emb)
 		}
-	if (msg.content=="Server bumped"&&msg.author.id=="315926021457051650")
+	if (ff(msg,"Server bumped")&&msg.author.id=="315926021457051650")
 		{
 			msg.channel.send("ok");
 			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
 		}
-	if (msg.content=="Сервер Up"&&msg.author.id=="464272403766444044")
+	if (ff(msg,"Сервер Up")&&msg.author.id=="464272403766444044")
 		{
 			msg.channel.send("ok");
 			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
