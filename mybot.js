@@ -6,6 +6,7 @@ const {
 } = require('discord.js');
 const fs = require("fs");
 var search = require('youtube-search');
+const welc = require('./welc.json');
 const ytdl = require('ytdl-core');
 const config = require('./config.json');
 const sqlite3 = require('sqlite3').verbose();
@@ -77,6 +78,7 @@ function add(v)
 	let r="UPDATE Users SET points=points+"+f+" WHERE id_d="+v;
 	db.run(r);
 }
+var ms=welc.ms;
 client.on("message", (msg) => {
   add(msg.author.id);
   if (msg.content.startsWith("ping")) {
@@ -173,7 +175,17 @@ if (msg.content.startsWith("pick"))
 			msg.channel.send("ok");
 			setTimeout(function(){msg.channel.send("Пора бампать.<@&613799917718077450>" );},14400000);
 		}
-	
+	if (msg.content.startsWith("add")&&msg.author.id=="465931840398557194")
+		{
+			var df=msg.content.split(" ");
+			welc.ms.push({img:df[1],emg:df[2]});
+			ms=welc.ms;
+			fs.writeFile("welc.json",JSON.stringify(welc),function(err, result) {
+				if (err) msg.channel.send('error', err)
+				else
+					msg.channel.send("ok");
+   			});
+		}
 });
 
 const servers = ["381829822982389771","471630590806851584"];
