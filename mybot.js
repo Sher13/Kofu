@@ -59,6 +59,17 @@ function ff(msg,s)
 	} else
 		return false;
 }
+function shuffle(v)
+{
+	for(var i=0;i<v.length;i++)
+		{
+			var e=(Math.floor(Math.random()*v.length))%v.length;
+			var t=v[e];
+			v[e]=v[i];
+			v[i]=t;
+		}
+	return v;
+}
 function nw(v)
 {
 	let sql="INSERT INTO Users(id_d) VALUES ("+v+")";
