@@ -78,7 +78,7 @@ function add(v)
 	let r="UPDATE Users SET points=points+"+f+" WHERE id_d="+v;
 	db.run(r);
 }
-var ms=welc.ms;
+
 client.on("message", (msg) => {
   add(msg.author.id);
   if (msg.content.startsWith("ping")) {
@@ -179,7 +179,6 @@ if (msg.content.startsWith("pick"))
 		{
 			var df=msg.content.split(" ");
 			welc.ms.push({img:df[1],emg:df[2]});
-			ms=welc.ms;
 			fs.writeFile("welc.json",JSON.stringify(welc),function(err, result) {
 				if (err) msg.channel.send('error', err)
 				else
@@ -189,6 +188,7 @@ if (msg.content.startsWith("pick"))
 });
 client.on('guildMemberAdd', member => {
 	if (member.guild.id=="471630590806851584") {
+	var ms=welc.ms;
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
   	var f = client.channels.get("571749559689019408");
 	var emb = new RichEmbed()
