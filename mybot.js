@@ -187,7 +187,42 @@ if (msg.content.startsWith("pick"))
    			});
 		}
 });
-
+client.on('guildMemberAdd', member => {
+	if (member.guild.id=="471630590806851584") {
+	var nw=Math.floor(Math.random()*ms.length)%ms.length;
+  	var f = client.channels.get("571749559689019408");
+	var emb = new RichEmbed()
+ 			.setImage(ms[nw].img)
+			.setTitle("Welcome");
+	f.send(emb)
+  .then(res=>{
+	var em=new Array(0);
+	em.push(ms[nw].emg);
+	while(em.length!=5)
+		{
+			var w=Math.floor(Math.random()*ms.length)%ms.length;
+			var fl=1;
+			for(var i=0;i<em.length;i++)
+				if (em[i]==ms[w].emg)
+					fl=0;
+			if (fl==1)
+				em.push(ms[w].emg);
+		}
+	em=shuffle(em);
+	for(var i=0;i<em.length;i++)
+		res.react(em[i]);
+	const filter=(react,user)=>user.id ==member.id;
+			const collector = res.createReactionCollector(filter);
+			collector.on('collect', (reaction, reactionCollector) => {
+				if (reaction.emoji.name==ms[nw].emg)
+					member.addRole("494932346655604736");
+				else
+					f.send("no");
+				collector.stop();
+			});	
+});
+	}
+});
 const servers = ["381829822982389771","471630590806851584"];
 
 client.on('ready', () => {
