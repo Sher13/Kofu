@@ -128,7 +128,7 @@ if (msg.content.startsWith("pick"))
 				}
 			msg.delete();
 		}
-	if (msg.content.startsWith("-h"))
+	if (msg.content.startsWith("hh"))
 		{
 			msg.react("➕"); 
 			msg.react("➖");
