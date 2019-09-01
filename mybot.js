@@ -99,7 +99,7 @@ if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
-if (msg.content.startsWith("pick"))
+if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 		{
 			
 			var p1=msg.content.indexOf(' ');
