@@ -198,10 +198,10 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 		}
 });
 client.on('guildMemberAdd', member => {
-	if (member.guild.id=="471630590806851584") {
+	if (member.guild.id=="611111608219074570") {
 	var ms=welc.ms;
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
-  	var f = client.channels.get("571749559689019408");
+  	var f = client.channels.get("618171844775641088");
 	var emb = new RichEmbed()
  			.setImage(ms[nw].img)
 			.setTitle("Welcome");
@@ -226,7 +226,7 @@ client.on('guildMemberAdd', member => {
 			const collector = res.createReactionCollector(filter);
 			collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
-					member.addRole("494932346655604736");
+					member.addRole("611251294807654453");
 				else
 					f.send("no");
 				collector.stop();
