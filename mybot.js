@@ -281,7 +281,7 @@ client.on('guildMemberAdd', member => {
 				{
 					f.send("Отлично, выбери <#611883715190194196> и приступай...")
 					collector.stop();
-					setTimeout(function(){member.addRole("611251294807654453")},10000});
+					setTimeout(function(){member.addRole("611251294807654453")},10000);
 				}
 				else
 				{
