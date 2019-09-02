@@ -228,7 +228,7 @@ function iden(f,member,ms,kl)
 				if (reaction.emoji.name==ms[nw].emg)
 				{
 					f.send("Отлично, выбери <#611883715190194196> и приступай...")
-					setTimeout(function(){member.addRole("611251294807654453"),10000});
+					setTimeout(function(){member.addRole("611251294807654453")},10000);
 					collector.stop();
 				}
 				else
@@ -242,7 +242,7 @@ function iden(f,member,ms,kl)
 						{
 							f.send("К сожалению, ты ошибся. Прощай");
 							collector.stop();
-							member.kick();
+							setTimeout(function(){member.kick()},10000);
 						}
 				}
 			});	
@@ -281,7 +281,7 @@ client.on('guildMemberAdd', member => {
 				{
 					f.send("Отлично, выбери <#611883715190194196> и приступай...")
 					collector.stop();
-					setTimeout(function(){member.addRole("611251294807654453"),10000});
+					setTimeout(function(){member.addRole("611251294807654453")},10000});
 				}
 				else
 				{
