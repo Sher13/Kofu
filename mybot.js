@@ -224,6 +224,7 @@ function iden(f,member,ms,kl)
 				por=0;
 				const filter=(react,user)=>user.id ==member.id;
 				const collector = res.createReactionCollector(filter);
+				let timerId = setTimeout(function(){member.kick()},9000);
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
@@ -236,20 +237,18 @@ function iden(f,member,ms,kl)
 					if (kl==2){
 					f.send("К сожалению, ты ошибся. Осталась одна попытка.");
 					collector.stop();
+					clearTimeout(timerId);
 					iden(f,member,ms,kl+1);
 					}
 					if (kl==3)
 						{
 							f.send("К сожалению, ты ошибся. Прощай");
 							collector.stop();
+							clearTimeout(timerId);
 							setTimeout(function(){member.kick()},10000);
 						}
 				}
 			});	
-					let timerId = setTimeout(function(){member.kick()},9000);
-					collector.on('end', (collected, reason) => {
-						clearTimeout(timerId);
-					});
 				});
 }
 client.on('guildMemberAdd', member => {
@@ -280,24 +279,24 @@ client.on('guildMemberAdd', member => {
 		res.react(em[i]);
 	const filter=(react,user)=>user.id ==member.id;
 			const collector = res.createReactionCollector(filter);
+			let timerId = setTimeout(function(){member.kick()},9000);
 			collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
 					f.send("Отлично, выбери <#611883715190194196> и приступай. Роль будет выдана через 10 секунд")
 					collector.stop();
+					clearTimeout(timerId);
 					setTimeout(function(){member.addRole("611251294807654453")},10000);
 				}
 				else
 				{
 					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
 					collector.stop();
+					clearTimeout(timerId);
 					iden(f,member,ms,2);
 				}
 				collector.stop();
 			});	
-		collector.on('end', (collected, reason) => {
-						clearTimeout(timerId);
-					});
 });
 	}
 });
