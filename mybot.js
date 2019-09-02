@@ -246,6 +246,10 @@ function iden(f,member,ms,kl)
 						}
 				}
 			});	
+					let timerId = setTimeout(function(){member.kick()},9000);
+					collector.on('end', (collected, reason) => {
+						clearTimeout(timerId);
+					}
 				});
 }
 client.on('guildMemberAdd', member => {
@@ -291,6 +295,10 @@ client.on('guildMemberAdd', member => {
 				}
 				collector.stop();
 			});	
+		let timerId = setTimeout(function(){member.kick()},9000);
+		collector.on('end', (collected, reason) => {
+			clearTimeout(timerId);
+		}
 });
 	}
 });
