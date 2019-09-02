@@ -204,7 +204,7 @@ client.on('guildMemberAdd', member => {
   	var f = client.channels.get("618171844775641088");
 	var emb = new RichEmbed()
  			.setImage(ms[nw].img)
-			.setTitle("Welcome");
+			.setTitle("Кто я? Нажми правильную реакцию:)");
 	f.send(emb)
   .then(res=>{
 	var em=new Array(0);
@@ -226,9 +226,12 @@ client.on('guildMemberAdd', member => {
 			const collector = res.createReactionCollector(filter);
 			collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
+				{
+					f.send("Отлично. Выбери чернила <#611883715190194196> и приступай")
 					member.addRole("611251294807654453");
+				}
 				else
-					f.send("no");
+					f.send("К сожалению, ты ошибся.");
 				collector.stop();
 			});	
 });
