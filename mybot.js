@@ -205,7 +205,7 @@ client.on('guildMemberAdd', member => {
 	var fl=0;
 	var emb = new RichEmbed()
  			.setImage(ms[nw].img)
-			.setTitle("Кто я? Нажми правильную реакцию:)");
+			.setTitle("<@"+member.id+"> Кто я? Нажми правильную реакцию:)");
 	f.send(emb)
   .then(res=>{
 	var em=new Array(0);
@@ -233,7 +233,7 @@ client.on('guildMemberAdd', member => {
 				}
 				else
 				{
-					f.send("К сожалению, ты ошибся.");
+					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
 					fl=1;
 				}
 				collector.stop();
@@ -246,7 +246,7 @@ client.on('guildMemberAdd', member => {
 				var fl=0;
 				var emb = new RichEmbed()
 					.setImage(ms[nw].img)
-					.setTitle("Кто я? Нажми правильную реакцию:)");
+					.setTitle("<@"+member.id+"> Кто я? Нажми правильную реакцию:)");
 				f.send(emb)
 					.then(res=>{
 						var em=new Array(0);
@@ -275,7 +275,7 @@ client.on('guildMemberAdd', member => {
 				}
 				else
 				{
-					f.send("К сожалению, ты ошибся.");
+					f.send("К сожалению, ты ошибся. Осталась одна попытка.");
 					fl=1;
 				}
 				collector.stop();
@@ -289,7 +289,7 @@ client.on('guildMemberAdd', member => {
 				var fl=0;
 				var emb = new RichEmbed()
 					.setImage(ms[nw].img)
-					.setTitle("Кто я? Нажми правильную реакцию:)");
+					.setTitle("<@"+member.id+"> Кто я? Нажми правильную реакцию:)");
 				f.send(emb)
 					.then(res=>{
 						var em=new Array(0);
@@ -318,7 +318,7 @@ client.on('guildMemberAdd', member => {
 				}
 				else
 				{
-					f.send("К сожалению, ты ошибся.");
+					f.send("К сожалению, ты ошибся. Прощай");
 					member.kick();
 				}
 				collector.stop();
