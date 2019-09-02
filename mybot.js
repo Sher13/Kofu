@@ -224,7 +224,7 @@ function iden(f,member,ms,kl)
 				por=0;
 				const filter=(react,user)=>user.id ==member.id;
 				const collector = res.createReactionCollector(filter);
-				let timerId = setTimeout(function(){member.kick()},9000);
+				let timerId = setTimeout(function(){member.kick()},900000);
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
@@ -279,7 +279,7 @@ client.on('guildMemberAdd', member => {
 		res.react(em[i]);
 	const filter=(react,user)=>user.id ==member.id;
 			const collector = res.createReactionCollector(filter);
-			let timerId = setTimeout(function(){member.kick()},9000);
+			let timerId = setTimeout(function(){member.kick()},900000);
 			collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
