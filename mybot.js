@@ -227,8 +227,8 @@ function iden(f,member,ms,kl)
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
-					f.send("Отлично, выбери <#611883715190194196> и приступай...").then(function(){
-					member.addRole("611251294807654453");});
+					f.send("Отлично, выбери <#611883715190194196> и приступай...")
+					setTimeout(member.addRole("611251294807654453"),5000);
 					collector.stop();
 				}
 				else
@@ -279,12 +279,14 @@ client.on('guildMemberAdd', member => {
 			collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
-					f.send("Отлично, выбери <#611883715190194196> и приступай...").then(function(){
-					member.addRole("611251294807654453");});
+					f.send("Отлично, выбери <#611883715190194196> и приступай...")
+					collector.stop();
+					setTimeout(member.addRole("611251294807654453"),5000);
 				}
 				else
 				{
 					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
+					collector.stop();
 					iden(f,member,ms,2);
 				}
 				collector.stop();
