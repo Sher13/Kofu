@@ -227,7 +227,7 @@ client.on('guildMemberAdd', member => {
 			collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
-					f.send("Отлично. Выбери чернила <#611883715190194196> и приступай")
+					f.send("Отлично, выбери <#611883715190194196> и приступай...")
 					member.addRole("611251294807654453");
 				}
 				else
