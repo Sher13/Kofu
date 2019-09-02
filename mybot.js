@@ -197,16 +197,67 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
    			});
 		}
 });
+function iden(f,member,ms,kl)
+{
+	var nw=Math.floor(Math.random()*ms.length)%ms.length;
+				var fl=0;
+				var emb = new RichEmbed()
+					.setImage(ms[nw].img)
+					.setTitle("Кто я? Нажми правильную реакцию:)");
+				f.send("<@"+member.id+">",emb)
+					.then(res=>{
+						var em=new Array(0);
+						em.push(ms[nw].emg);
+					while(em.length!=5)
+					{
+						var w=Math.floor(Math.random()*ms.length)%ms.length;
+						var fl=1;
+						for(var i=0;i<em.length;i++)
+							if (em[i]==ms[w].emg)
+								fl=0;
+						if (fl==1)
+							em.push(ms[w].emg);
+					}
+					em=shuffle(em);
+				for(var i=0;i<em.length;i++)
+				res.react(em[i]);
+				por=0;
+				const filter=(react,user)=>user.id ==member.id;
+				const collector = res.createReactionCollector(filter);
+					collector.on('collect', (reaction, reactionCollector) => {
+				if (reaction.emoji.name==ms[nw].emg)
+				{
+					f.send("Отлично, выбери <#611883715190194196> и приступай...")
+					member.addRole("611251294807654453");
+					collector.stop();
+				}
+				else
+				{
+					if (kl==2){
+					f.send("К сожалению, ты ошибся. Осталась одна попытка.");
+					collector.stop();
+					iden(f,member,ms,kl+1);
+					}
+					if (kl==3)
+						{
+							f.send("К сожалению, ты ошибся. Прощай");
+							collector.stop();
+							member.kick();
+						}
+				}
+			});	
+				});
+}
 client.on('guildMemberAdd', member => {
 	if (member.guild.id=="611111608219074570") {
 	var ms=welc.ms;
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
   	var f = client.channels.get("618171844775641088");
-	var fl=0;
+	var por=0;
 	var emb = new RichEmbed()
  			.setImage(ms[nw].img)
-			.setTitle("<@"+member.id+"> Кто я? Нажми правильную реакцию:)");
-	f.send(emb)
+			.setTitle(" Кто я? Нажми правильную реакцию:)");
+	f.send("<@"+member.id+">",emb)
   .then(res=>{
 	var em=new Array(0);
 	em.push(ms[nw].emg);
@@ -234,97 +285,11 @@ client.on('guildMemberAdd', member => {
 				else
 				{
 					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
-					fl=1;
+					iden(f,member,ms,2);
 				}
 				collector.stop();
 			});	
 });
-		if (fl==1)
-			{
-				var nw=Math.floor(Math.random()*ms.length)%ms.length;
-  				var f = client.channels.get("618171844775641088");
-				var fl=0;
-				var emb = new RichEmbed()
-					.setImage(ms[nw].img)
-					.setTitle("<@"+member.id+"> Кто я? Нажми правильную реакцию:)");
-				f.send(emb)
-					.then(res=>{
-						var em=new Array(0);
-						em.push(ms[nw].emg);
-					while(em.length!=5)
-					{
-						var w=Math.floor(Math.random()*ms.length)%ms.length;
-						var fl=1;
-						for(var i=0;i<em.length;i++)
-							if (em[i]==ms[w].emg)
-								fl=0;
-						if (fl==1)
-							em.push(ms[w].emg);
-					}
-					em=shuffle(em);
-				for(var i=0;i<em.length;i++)
-				res.react(em[i]);
-				fl=0;
-				const filter=(react,user)=>user.id ==member.id;
-				const collector = res.createReactionCollector(filter);
-					collector.on('collect', (reaction, reactionCollector) => {
-				if (reaction.emoji.name==ms[nw].emg)
-				{
-					f.send("Отлично, выбери <#611883715190194196> и приступай...")
-					member.addRole("611251294807654453");
-				}
-				else
-				{
-					f.send("К сожалению, ты ошибся. Осталась одна попытка.");
-					fl=1;
-				}
-				collector.stop();
-			});	
-			});
-			}
-		if (fl==1)
-			{
-				var nw=Math.floor(Math.random()*ms.length)%ms.length;
-  				var f = client.channels.get("618171844775641088");
-				var fl=0;
-				var emb = new RichEmbed()
-					.setImage(ms[nw].img)
-					.setTitle("<@"+member.id+"> Кто я? Нажми правильную реакцию:)");
-				f.send(emb)
-					.then(res=>{
-						var em=new Array(0);
-						em.push(ms[nw].emg);
-					while(em.length!=5)
-					{
-						var w=Math.floor(Math.random()*ms.length)%ms.length;
-						var fl=1;
-						for(var i=0;i<em.length;i++)
-							if (em[i]==ms[w].emg)
-								fl=0;
-						if (fl==1)
-							em.push(ms[w].emg);
-					}
-					em=shuffle(em);
-				for(var i=0;i<em.length;i++)
-				res.react(em[i]);
-				fl=0;
-				const filter=(react,user)=>user.id ==member.id;
-				const collector = res.createReactionCollector(filter);
-					collector.on('collect', (reaction, reactionCollector) => {
-				if (reaction.emoji.name==ms[nw].emg)
-				{
-					f.send("Отлично, выбери <#611883715190194196> и приступай...")
-					member.addRole("611251294807654453");
-				}
-				else
-				{
-					f.send("К сожалению, ты ошибся. Прощай");
-					member.kick();
-				}
-				collector.stop();
-			});	
-			});
-			}
 	}
 });
 const servers = ["381829822982389771","471630590806851584"];
