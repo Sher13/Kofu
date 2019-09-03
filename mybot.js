@@ -197,7 +197,7 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
    			});
 		}
 });
-function iden(f,member,ms,kl)
+function iden(f,member,ms,role,kl)
 {
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
 				var fl=0;
@@ -224,12 +224,15 @@ function iden(f,member,ms,kl)
 				por=0;
 				const filter=(react,user)=>user.id ==member.id;
 				const collector = res.createReactionCollector(filter);
-				let timerId = setTimeout(function(){member.kick()},900000);
+				let timerId = setTimeout(function(){
+					f.send("Время ожидания истекло. Прощай.");
+					member.kick();
+				},900000);
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
 					f.send("Отлично, выбери <#611883715190194196> и приступай. Роль будет выдана через 10 секунд")
-					setTimeout(function(){member.addRole("611251294807654453")},10000);
+					setTimeout(function(){member.addRole(role)},10000);
 					collector.stop();
 				}
 				else
@@ -238,7 +241,13 @@ function iden(f,member,ms,kl)
 					f.send("К сожалению, ты ошибся. Осталась одна попытка.");
 					collector.stop();
 					clearTimeout(timerId);
-					iden(f,member,ms,kl+1);
+					iden(f,member,ms,role,kl+1);
+					}
+					if (kl==1){
+					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
+					collector.stop();
+					clearTimeout(timerId);
+					iden(f,member,ms,role,kl+1);
 					}
 					if (kl==3)
 						{
@@ -256,48 +265,13 @@ client.on('guildMemberAdd', member => {
 	var ms=welc.ms;
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
   	var f = client.channels.get("618171844775641088");
-	var por=0;
-	var emb = new RichEmbed()
- 			.setImage(ms[nw].img)
-			.setTitle(" Кто я? Нажми правильную реакцию:)");
-	f.send("<@"+member.id+">",emb)
-  .then(res=>{
-	var em=new Array(0);
-	em.push(ms[nw].emg);
-	while(em.length!=5)
-		{
-			var w=Math.floor(Math.random()*ms.length)%ms.length;
-			var fl=1;
-			for(var i=0;i<em.length;i++)
-				if (em[i]==ms[w].emg)
-					fl=0;
-			if (fl==1)
-				em.push(ms[w].emg);
-		}
-	em=shuffle(em);
-	for(var i=0;i<em.length;i++)
-		res.react(em[i]);
-	const filter=(react,user)=>user.id ==member.id;
-			const collector = res.createReactionCollector(filter);
-			let timerId = setTimeout(function(){member.kick()},900000);
-			collector.on('collect', (reaction, reactionCollector) => {
-				if (reaction.emoji.name==ms[nw].emg)
-				{
-					f.send("Отлично, выбери <#611883715190194196> и приступай. Роль будет выдана через 10 секунд")
-					collector.stop();
-					clearTimeout(timerId);
-					setTimeout(function(){member.addRole("611251294807654453")},10000);
-				}
-				else
-				{
-					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
-					collector.stop();
-					clearTimeout(timerId);
-					iden(f,member,ms,2);
-				}
-				collector.stop();
-			});	
-});
+	iden(f,member,ms,"611251294807654453",1);
+	}
+	if (member.guild.id=="471630590806851584") {
+	var ms=welc.ms;
+	var nw=Math.floor(Math.random()*ms.length)%ms.length;
+  	var f = client.channels.get("571749559689019408");
+	iden(f,member,ms,"494932346655604736",1);
 	}
 });
 const servers = ["381829822982389771","471630590806851584"];
