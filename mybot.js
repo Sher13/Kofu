@@ -232,6 +232,7 @@ function iden(f,member,ms,role,kl)
 				if (reaction.emoji.name==ms[nw].emg)
 				{
 					f.send("Отлично, выбери <#611883715190194196> и приступай. Роль будет выдана через 10 секунд")
+					clearTimeout(timerId);
 					setTimeout(function(){member.addRole(role)},10000);
 					collector.stop();
 				}
