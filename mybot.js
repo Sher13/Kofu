@@ -225,12 +225,9 @@ function iden(f,f1,member,ms,role,kl)
 				const filter=(react,user)=>user.id ==member.id;
 				const collector = res.createReactionCollector(filter);
 				let timerId = setTimeout(function(){
-					if (member.roles.length==0){
 					f.send("<@"+member.id+">"+"Время ожидания истекло. Прощай.");
 					member.kick();
-					}
-					f.send('ll');
-				},9000);
+				},900000);
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
