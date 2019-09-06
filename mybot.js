@@ -199,6 +199,7 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 });
 function iden(f,f1,member,ms,role,kl)
 {
+	if (member){
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
 				var fl=0;
 				var emb = new RichEmbed()
@@ -262,6 +263,7 @@ function iden(f,f1,member,ms,role,kl)
 				}
 			});	
 				});
+	}
 }
 client.on('guildMemberAdd', member => {
 	if (member.guild.id=="611111608219074570") {
