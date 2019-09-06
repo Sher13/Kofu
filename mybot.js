@@ -245,13 +245,13 @@ function iden(f,f1,member,ms,role,kl)
 					f.send("К сожалению, ты ошибся. Осталась одна попытка.");
 					collector.stop();
 					clearTimeout(timerId);
-					iden(f,member,ms,role,kl+1);
+					iden(f,f1,member,ms,role,kl+1);
 					}
 					if (kl==1){
 					f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
 					collector.stop();
 					clearTimeout(timerId);
-					iden(f,member,ms,role,kl+1);
+					iden(f,f1,member,ms,role,kl+1);
 					}
 					if (kl==3)
 						{
