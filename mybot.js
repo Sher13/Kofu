@@ -225,13 +225,15 @@ function iden(f,f1,member,ms,role,kl)
 				const filter=(react,user)=>user.id ==member.id;
 				const collector = res.createReactionCollector(filter);
 				let timerId = setTimeout(function(){
-					f.send("<@"+member.id+">"+"Время ожидания истекло. Прощай.");
+					if (member._roles.length==0){
+					f.send("<@"+member.id+"> "+"Время ожидания истекло. Прощай.");
 					member.kick();
+					}
 				},900000);
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
-					f1.send("Отлично, выбери <#611883715190194196> и приступай.")
+					f1.send("<@"+member.id+"> "+"Отлично, выбери <#611883715190194196> и приступай.")
 					clearTimeout(timerId);
 					member.addRole(role)
 					collector.stop();
@@ -273,7 +275,8 @@ client.on('guildMemberAdd', member => {
 	var ms=welc.ms;
 	var nw=Math.floor(Math.random()*ms.length)%ms.length;
   	var f = client.channels.get("571749559689019408");
-	iden(f,f,member,ms,"494932346655604736",1);
+	var f1 = client.channels.get("619552846328627201");
+	iden(f,f1,member,ms,"494932346655604736",1);
 	}
 });
 const servers = ["381829822982389771","471630590806851584"];
