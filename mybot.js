@@ -229,7 +229,8 @@ function iden(f,f1,member,ms,role,kl)
 					f.send("<@"+member.id+">"+"Время ожидания истекло. Прощай.");
 					member.kick();
 					}
-				},900000);
+					f.send('ll');
+				},9000);
 					collector.on('collect', (reaction, reactionCollector) => {
 				if (reaction.emoji.name==ms[nw].emg)
 				{
