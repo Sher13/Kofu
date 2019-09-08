@@ -281,6 +281,14 @@ client.on('guildMemberAdd', member => {
 	iden(f,f1,member,ms,"494932346655604736",1);
 	}
 });
+client.on("voiceStateUpdate", (ol,nw) =>{
+	if (nw.guild.id=="471630590806851584"){
+	if(nw.voiceChannelID)
+		nw.addRole("620182672618160137");
+	else
+		nw.removeRole("620182672618160137");
+	}
+})
 const servers = ["381829822982389771","471630590806851584"];
 
 client.on('ready', () => {
