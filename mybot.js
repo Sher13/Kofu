@@ -106,8 +106,6 @@ if (msg.content.startsWith("say")&&msg.author.id=="465931840398557194")
 			p1=text.indexOf(' ');
 			var ch_id=text.substring(0,p1);
 			text=text.substring(p1+1);
-			p1=text.indexOf(' ');
-			text=text.substring(p1+1);
 			client.channels.get(ch_id).send(text);
 	}
 if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
