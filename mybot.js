@@ -99,6 +99,17 @@ if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
   }
+if (msg.content.startsWith("say")&&msg.author.id=="465931840398557194")
+	{
+		var p1=msg.content.indexOf(' ');
+			var text=msg.content.substring(p1+1);
+			p1=text.indexOf(' ');
+			var ch_id=text.substring(0,p1);
+			text=text.substring(p1+1);
+			p1=text.indexOf(' ');
+			text=text.substring(p1+1);
+			client.channels.get(ch_id).send(text);
+	}
 if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 		{
 			
