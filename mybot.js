@@ -95,6 +95,26 @@ client.on("message", (msg) => {
   if (msg.content.startsWith("ping")) {
     msg.channel.send("pong!");
   }
+  if (msg.content=="r")
+	  msg.member.setNickname("Розочка🌸");
+  if (msg.content=="t")
+	  msg.member.setNickname("Тюльпанчик🌷");
+  if (msg.content=="l")
+	  msg.member.setNickname("Лилия⚜️");
+  if (msg.content=="cr"&&(msg.author.id=="361571289384747012")||msg.author.id=="465931840398557194")
+	  {
+		  var e=msg.guild.members.array();
+		  for(var i=0;i<e.length;i++)
+		  {
+			 e[i].setNickname("Цветочек🌼");
+		  }
+	  }
+	if (msg.content=="cr1"&&(msg.author.id=="361571289384747012")||msg.author.id=="465931840398557194")
+	  {
+		  var e=msg.guild.members.array();
+		  for(var i=0;i<e.length;i++)
+			  e[i].setNickname("");
+	  }
 if (msg.content==="ch") {
     changeColor();
 	msg.channel.send("ok:ok_hand: :wink: ");
@@ -137,6 +157,9 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 				}
 			msg.delete();
 		}
+	if (msg.content==")
+		msg.channel.setRateLimitPerUser((Math.random()*400)%300);
+	if (msg.content=="stop"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194")
 	if (msg.content.startsWith("hh"))
 		{
 			msg.react("➕"); 
