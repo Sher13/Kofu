@@ -110,7 +110,7 @@ client.on("message", (msg) => {
 			  role="494465327476899840";
 		  var e=msg.guild.members.array();
 		  var s="";
-		  if (msg.content.indexOf(' '))
+		  if (msg.content.indexOf(' ')!=-1)
 			  s=msg.content.substring(msg.content.indexOf(' ')+1);
 		  else
 			  s="";
