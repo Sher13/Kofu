@@ -103,19 +103,29 @@ client.on("message", (msg) => {
 	  msg.member.setNickname("Лилия⚜️");
   if (msg.content=="cr"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
 	  {
+		  var role="";
+		  if (msg.guild.id=="470179380824506368")
+			  role="476520273479335937";
+		  if (msg.guild.id=="471630590806851584")
+			  role="494465327476899840";
 		  var e=msg.guild.members.array();
 		  for(var i=0;i<e.length;i++)
 		  {
-			 if (e[i].roles.has("476520273479335937"))
+			 if (e[i].roles.has(role))
 			 e[i].setNickname("Цветочек🌼");
 		  }
 	  }
 	if (msg.content=="cr1"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
 	  {
+		  var role="";
+		  if (msg.guild.id=="470179380824506368")
+			  role="476520273479335937";
+		  if (msg.guild.id=="471630590806851584")
+			  role="494465327476899840";
 		  var e=msg.guild.members.array();
 		  for(var i=0;i<e.length;i++)
 			  {
-				  if (e[i].roles.has("476520273479335937"))
+				  if (e[i].roles.has(role))
 			 		e[i].setNickname("");
 			  }
 	  }
