@@ -114,7 +114,9 @@ client.on("message", (msg) => {
 			 if (e[i].roles.has(role)) {
 			 	try {
 					e[i].setNickname("Цветочек🌼")
-				} catch(e){};
+				} catch(er){
+					msg.channel.send("Error");
+				};
 			 }
 		  }
 	  }
@@ -131,7 +133,9 @@ client.on("message", (msg) => {
 				  if (e[i].roles.has(role)) {
 			 		try {
 					     e[i].setNickname("Цветочек🌼")
-					} catch(e){};
+					} catch(er){
+						msg.channel.send("Error");
+					};
 				  }
 			  }
 	  }
