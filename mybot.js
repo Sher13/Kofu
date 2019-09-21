@@ -112,7 +112,9 @@ client.on("message", (msg) => {
 		  for(var i=0;i<e.length;i++)
 		  {
 			 if (e[i].roles.has(role))
-			 e[i].setNickname("Цветочек🌼");
+			 	try {
+					e[i].setNickname("Цветочек🌼")
+				} catch(e){};
 		  }
 	  }
 	if (msg.content=="cr1"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
@@ -126,7 +128,9 @@ client.on("message", (msg) => {
 		  for(var i=0;i<e.length;i++)
 			  {
 				  if (e[i].roles.has(role))
-			 		e[i].setNickname("");
+			 		try {
+					e[i].setNickname("Цветочек🌼")
+				} catch(e){};
 			  }
 	  }
 if (msg.content==="ch") {
