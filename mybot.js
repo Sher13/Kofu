@@ -111,10 +111,11 @@ client.on("message", (msg) => {
 		  var e=msg.guild.members.array();
 		  for(var i=0;i<e.length;i++)
 		  {
-			 if (e[i].roles.has(role))
+			 if (e[i].roles.has(role)) {
 			 	try {
 					e[i].setNickname("Цветочек🌼")
 				} catch(e){};
+			 }
 		  }
 	  }
 	if (msg.content=="cr1"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
@@ -127,10 +128,11 @@ client.on("message", (msg) => {
 		  var e=msg.guild.members.array();
 		  for(var i=0;i<e.length;i++)
 			  {
-				  if (e[i].roles.has(role))
+				  if (e[i].roles.has(role)) {
 			 		try {
-					e[i].setNickname("Цветочек🌼")
-				} catch(e){};
+					     e[i].setNickname("Цветочек🌼")
+					} catch(e){};
+				  }
 			  }
 	  }
 if (msg.content==="ch") {
