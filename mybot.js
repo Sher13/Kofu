@@ -194,7 +194,7 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 			 msg.channel.send("Goodbay :wave: ")
 			 setTimeout(function(){msg.guild.leave()},100);
 		}
-	if (msg.content=="cr"&&msg.author.id=="465931840398557194")
+	if (msg.content=="create"&&msg.author.id=="465931840398557194")
 		{
 			 let sql ='CREATE TABLE [Users] ([id] INTEGER NOT NULL PRIMARY KEY,[id_d] VARCHAR(30),[points] INTEGER DEFAULT 0)';
 			db.run(sql);
