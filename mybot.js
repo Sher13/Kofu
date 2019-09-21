@@ -101,7 +101,7 @@ client.on("message", (msg) => {
 	  msg.member.setNickname("Тюльпанчик🌷");
   if (msg.content=="l")
 	  msg.member.setNickname("Лилия⚜️");
-  if (msg.content=="cr"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
+  if (msg.content.startsWith("cr")&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
 	  {
 		  var role="";
 		  if (msg.guild.id=="470179380824506368")
@@ -109,35 +109,21 @@ client.on("message", (msg) => {
 		  if (msg.guild.id=="471630590806851584")
 			  role="494465327476899840";
 		  var e=msg.guild.members.array();
+		  var s="";
+		  if (msg.content.indexOf(' '))
+			  s=msg.content.substring(msg.content.indexOf(' ')+1);
+		  else
+			  s="";
 		  for(var i=0;i<e.length;i++)
 		  {
 			 if (e[i].roles.has(role)) {
 			 	try {
-					e[i].setNickname("Цветочек🌼")
+					e[i].setNickname(s)
 				} catch(er){
 					msg.channel.send("Error");
 				};
 			 }
 		  }
-	  }
-	if (msg.content=="cr1"&&(msg.author.id=="361571289384747012"||msg.author.id=="465931840398557194"))
-	  {
-		  var role="";
-		  if (msg.guild.id=="470179380824506368")
-			  role="476520273479335937";
-		  if (msg.guild.id=="471630590806851584")
-			  role="494465327476899840";
-		  var e=msg.guild.members.array();
-		  for(var i=0;i<e.length;i++)
-			  {
-				  if (e[i].roles.has(role)) {
-			 		try {
-					     e[i].setNickname("Цветочек🌼")
-					} catch(er){
-						msg.channel.send("Error");
-					};
-				  }
-			  }
 	  }
 if (msg.content==="ch") {
     changeColor();
