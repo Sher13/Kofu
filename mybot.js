@@ -172,7 +172,7 @@ if (msg.content.startsWith("pick")&&msg.author.id=="465931840398557194")
 			msg.react("➕"); 
 			msg.react("➖");
 		}
-	if (msg.content==="vi")
+	if (msg.content.toLowerCase()==="vi")
 		{
 			var e=Math.round(Math.random()*v.length);
 			var emb = new RichEmbed()
