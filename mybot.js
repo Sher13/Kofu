@@ -187,7 +187,6 @@ client.on("message", (msg) => {
         db.run(sql);
     }
     if (msg.content == "get") {
-		async function() {
         var f = 0;
         let sql = "SELECT points FROM Users WHERE id_d= ?"
         let id_d = msg.author.id;
