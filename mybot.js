@@ -187,25 +187,27 @@ client.on("message", (msg) => {
         db.run(sql);
     }
     if (msg.content == "get") {
-		async () => {
+		async function() {
         var f = 0;
         let sql = "SELECT points FROM Users WHERE id_d= ?"
         let id_d = msg.author.id;
-        await db.get(sql, [id_d], (err, row) => {
+        db.get(sql, [id_d], (err, row) => {
             return row ?
                 f = row.points :
                 msg.reply(`Ууупс, что-то пошло не так. Подожди минутку и попробуй снова :wink: :cherry_blossom: `);
         });
-        var emb = new RichEmbed()
-            .setColor(16648050)
-            .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
-        msg.reply(emb);
-		}
+        setTimeout(function() {
+            var emb = new RichEmbed()
+                .setColor(16648050)
+                .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
+            msg.reply(emb)
+        }, 150);
     }
     if (msg.content == "ava") {
         var emb = new RichEmbed()
             .setColor(16648050)
             .setImage(msg.author.avatarURL);
+
         msg.reply(emb)
     }
     if (msg.author.id == "315926021457051650" && findStrings(msg, "Server bumped")) {
