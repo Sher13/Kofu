@@ -5,12 +5,15 @@ const {
     RichEmbed
 } = require('discord.js');
 const fs = require("fs");
-var search = require('youtube-search');
 const welc = require('./welc.json');
-const ytdl = require('ytdl-core');
 const config = require('./config.json');
 const sqlite3 = require('sqlite3').verbose();
+
+// Const
+
 let db = new sqlite3.Database('db/users.db');
+var v = config.vs;
+const servers = ["381829822982389771", "471630590806851584"];
 
 client.on("ready", () => {
     console.log("I am ready!");
@@ -22,48 +25,16 @@ client.on("ready", () => {
         status: 'online'
     })
 });
-var v = config.vs;
 
-function changeColor() {
-    var kl = (Math.round((Math.random() * 10000000000)) % 16777216);
-    var zet = '#' + kl.toString(16);
+// Just function
 
-    for (let index = 0; index < servers.length; ++index) {
-        client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(zet);
-    }
-    var f = client.channels.get("535391187411140608");
-    var emb = {
-        embed: {
-            title: zet,
-            color: kl
-        }
-    };
-    f.send(emb);
-
-}
-
-function findStrings(msg, s) {
-    if (msg.embeds[0]) {
-        if (msg.embeds[0].description && msg.embeds[0].description.includes(s))
-            return true;
-        if (msg.embeds[0].title && msg.embeds[0].title.includes(s))
-            return true;
-        if (msg.embeds[0].author && msg.embeds[0].author.name && msg.embeds[0].author.name.includes(s))
-            return true;
-        for (var i = 0; i < msg.embeds[0].fields.length; i++) {
-            if (msg.embeds[0].fields[i].name.includes(s))
-                return true;
-            if (msg.embeds[0].fields[i].value.includes(s))
-                return true;
-        }
-        return false;
-    } else
-        return false;
+function getRandom(l, r) {
+    return Math.round((Math.random() * r)) % (r - l) + l;
 }
 
 function shuffle(v) {
     for (var i = 0; i < v.length; i++) {
-        var e = (Math.floor(Math.random() * v.length)) % v.length;
+        var e = getRandom(0, v.length);
         var t = v[e];
         v[e] = v[i];
         v[i] = t;
@@ -71,71 +42,60 @@ function shuffle(v) {
     return v;
 }
 
-function newUsers(v) {
-    let sql = "INSERT INTO Users(id_d) VALUES (" + v + ")";
-    db.run(sql);
-}
+// Discord function
 
-function addPoint(v) {
-    var f = 2;
-    let sql = "SELECT points FROM Users WHERE id_d= ?"
-    let id_d = v;
-    db.get(sql, [id_d], (err, row) => {
-        return row ?
-            f = 2 :
-            newUsers(v);
-    });
-    f = Math.floor(Math.random() * 5 + 5);
-    let r = "UPDATE Users SET points=points+" + f + " WHERE id_d=" + v;
-    db.run(r);
-}
-
-client.on("message", (msg) => {
-    addPoint(msg.author.id);
-    if (msg.content.startsWith("ping")) {
-        msg.channel.send("pong!");
+function changeColor() {
+    var value = getRandom(0, 16777216);
+    var color = '#' + value.toString(16);
+    for (let index = 0; index < servers.length; index++) {
+        client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(color);
     }
-    if (msg.content == "r")
-        msg.member.setNickname("Розочка🌸");
-    if (msg.content == "t")
-        msg.member.setNickname("Тюльпанчик🌷");
-    if (msg.content == "l")
-        msg.member.setNickname("Лилия⚜️");
-    if (msg.content.startsWith("cr") && (msg.author.id == "361571289384747012" || msg.author.id == "465931840398557194")) {
-        var role = "";
-        if (msg.guild.id == "470179380824506368")
-            role = "476520273479335937";
-        if (msg.guild.id == "471630590806851584")
-            role = "494465327476899840";
-        var e = msg.guild.members.array();
-        var s = "";
-        if (msg.content.indexOf(' ') != -1)
-            s = msg.content.substring(msg.content.indexOf(' ') + 1);
-        else
-            s = "";
-        for (var i = 0; i < e.length; i++) {
-            if (e[i].roles.has(role)) {
-                try {
-                    e[i].setNickname(s)
-                } catch (er) {
-                    msg.channel.send("Error");
-                };
-            }
+    var channel = client.channels.get("535391187411140608");
+    var emb = {
+        embed: {
+            title: color,
+            color: value
         }
-    }
-    if (msg.content == "ch") {
-        changeColor();
-        msg.channel.send("ok:ok_hand: :wink: ");
-    }
-    if (msg.content.startsWith("say") && msg.author.id == "465931840398557194") {
+    };
+    channel.send(emb);
+}
+
+function findStrings(msg, s) {
+    if (msg.embeds[0]) {
+        var emb = msg.embeds[0];
+        if (emb.description && emb.description.includes(s))
+            return true;
+        if (emb.title && emb.title.includes(s))
+            return true;
+        if (emb.author && emb.author.name && emb.author.name.includes(s))
+            return true;
+        for (var i = 0; i < emb.fields.length; i++) {
+            if (emb.fields[i].name.includes(s))
+                return true;
+            if (emb.fields[i].value.includes(s))
+                return true;
+        }
+        return false;
+    } else
+        return false;
+}
+
+function say(msg) {
+    try {
         var p1 = msg.content.indexOf(' ');
         var text = msg.content.substring(p1 + 1);
         p1 = text.indexOf(' ');
         var ch_id = text.substring(0, p1);
         text = text.substring(p1 + 1);
         client.channels.get(ch_id).send(text);
+        msg.delete();
+    } catch  {
+        msg.reply("**ERROR!!**");
     }
-    if (msg.content.startsWith("pick") && msg.author.id == "465931840398557194") {
+}
+
+function pick(msg) {
+    try {
         var p1 = msg.content.indexOf(' ');
         var text = msg.content.substring(p1 + 1);
         p1 = text.indexOf(' ');
@@ -151,93 +111,23 @@ client.on("message", (msg) => {
             p1 = text.indexOf(':');
             em_id = text.substring(p1 + 1, text.length - 1);
         }
-        try {
-            client.channels.get(ch_id).fetchMessages({
-                around: m_id,
-                limit: 1
-            }).then(
-                messages => {
-                    messages.first().react(em_id);
-                })
-        } catch (e) {
-            msg.reply("**ERROR!!**");
-        }
+        client.channels.get(ch_id).fetchMessages({
+            around: m_id,
+            limit: 1
+        }).then(
+            messages => {
+                messages.first().react(em_id);
+            })
         msg.delete();
+    } catch (er) {
+        msg.reply("**ERROR!!**");
+		console.log(er);
     }
-    if (msg.content.startsWith("hh")) {
-        msg.react("➕");
-        msg.react("➖");
-    }
-    if (msg.content.toLowerCase() == "vi") {
-        var e = Math.round(Math.random() * v.length);
-        var emb = new RichEmbed()
-            .setColor(16648050)
-            .setImage(v[e]);
-        msg.channel.send(emb);
-        msg.delete();
-    }
-    if (msg.content == "leave" && msg.author.id == "465931840398557194") {
-        msg.channel.send("Goodbay :wave: ")
-        setTimeout(function() {
-            msg.guild.leave()
-        }, 100);
-    }
-    if (msg.content == "create" && msg.author.id == "465931840398557194") {
-        let sql = 'CREATE TABLE [Users] ([id] INTEGER NOT NULL PRIMARY KEY,[id_d] VARCHAR(30),[points] INTEGER DEFAULT 0)';
-        db.run(sql);
-    }
-    if (msg.content == "get") {
-        var f = 0;
-        let sql = "SELECT points FROM Users WHERE id_d= ?"
-        let id_d = msg.author.id;
-        db.get(sql, [id_d], (err, row) => {
-            return row ?
-                f = row.points :
-                msg.reply(`Ууупс, что-то пошло не так. Подожди минутку и попробуй снова :wink: :cherry_blossom: `);
-        });
-        setTimeout(function() {
-            var emb = new RichEmbed()
-                .setColor(16648050)
-                .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
-            msg.reply(emb)
-        }, 150);
-    }
-    if (msg.content == "ava") {
-        var emb = new RichEmbed()
-            .setColor(16648050)
-            .setImage(msg.author.avatarURL);
-
-        msg.reply(emb)
-    }
-    if (msg.author.id == "315926021457051650" && findStrings(msg, "Server bumped")) {
-        msg.channel.send("ok");
-        setTimeout(function() {
-            msg.channel.send("Пора бампать.<@&613799917718077450>");
-        }, 14400000);
-    }
-    if (msg.author.id == "464272403766444044" && findStrings(msg, "Сервер Up")) {
-        msg.channel.send("ok");
-        setTimeout(function() {
-            msg.channel.send("Пора бампать.<@&613799917718077450>");
-        }, 14400000);
-    }
-    if (msg.content.startsWith("add") && msg.author.id == "465931840398557194") {
-        var df = msg.content.split(" ");
-        welc.ms.push({
-            img: df[1],
-            emg: df[2]
-        });
-        fs.writeFile("welc.json", JSON.stringify(welc), function(err, result) {
-            if (err) msg.channel.send('error', err)
-            else
-                msg.channel.send("ok");
-        });
-    }
-});
+}
 
 function iden(f, f1, member, ms, role, kl) {
     if (member) {
-        var nw = Math.floor(Math.random() * ms.length) % ms.length;
+        var nw = getRandom(0, ms.length);
         var fl = 0;
         var emb = new RichEmbed()
             .setImage(ms[nw].img)
@@ -247,7 +137,7 @@ function iden(f, f1, member, ms, role, kl) {
                 var em = new Array(0);
                 em.push(ms[nw].emg);
                 while (em.length != 5) {
-                    var w = Math.floor(Math.random() * ms.length) % ms.length;
+                    var w = getRandom(0, ms.length);
                     var fl = 1;
                     for (var i = 0; i < em.length; i++)
                         if (em[i] == ms[w].emg)
@@ -258,7 +148,6 @@ function iden(f, f1, member, ms, role, kl) {
                 em = shuffle(em);
                 for (var i = 0; i < em.length; i++)
                     res.react(em[i]);
-                por = 0;
                 const filter = (react, user) => user.id == member.id;
                 const collector = res.createReactionCollector(filter);
                 let timerId = setTimeout(function() {
@@ -299,6 +188,134 @@ function iden(f, f1, member, ms, role, kl) {
             });
     }
 }
+
+// DataBase
+
+function newUsers(v) {
+    let sql = "INSERT INTO Users(id_d) VALUES (" + v + ")";
+    db.run(sql);
+}
+
+function addPoint(v) {
+    var f = 2;
+    let sql = "SELECT points FROM Users WHERE id_d= ?"
+    let id_d = v;
+    db.get(sql, [id_d], (err, row) => {
+        return row ?
+            f = 2 :
+            newUsers(v);
+    });
+    f = Math.floor(Math.random() * 5 + 5);
+    let r = "UPDATE Users SET points=points+" + f + " WHERE id_d=" + v;
+    db.run(r);
+}
+
+// Message
+
+client.on("message", (msg) => {
+    addPoint(msg.author.id);
+    if (msg.content.startsWith("ping"))
+        msg.channel.send("pong!");
+    if (msg.content.startsWith("cr") && (msg.author.id == "361571289384747012" || msg.author.id == "465931840398557194")) {
+        var role = "";
+        if (msg.guild.id == "470179380824506368")
+            role = "476520273479335937";
+        if (msg.guild.id == "471630590806851584")
+            role = "494465327476899840";
+        var e = msg.guild.members.array();
+        var s = "";
+        if (msg.content.indexOf(' ') != -1)
+            s = msg.content.substring(msg.content.indexOf(' ') + 1);
+        for (var i = 0; i < e.length; i++) {
+            if (e[i].roles.has(role)) {
+                try {
+                    e[i].setNickname(s)
+                } catch  {
+                    msg.channel.send("Error");
+                };
+            }
+        }
+    }
+    if (msg.content == "ch") {
+        changeColor();
+        msg.channel.send("ok:ok_hand: :wink: ");
+    }
+    if (msg.content.startsWith("say") && msg.author.id == "465931840398557194") {
+        say(msg);
+    }
+    if (msg.content.startsWith("pick") && msg.author.id == "465931840398557194") {
+        pick(msg);
+    }
+    if (msg.content.startsWith("hh")) {
+        msg.react("➕");
+        msg.react("➖");
+    }
+    if (msg.content.toLowerCase() == "vi") {
+        var e = Math.round(Math.random() * v.length);
+        var emb = new RichEmbed()
+            .setColor(16648050)
+            .setImage(v[e]);
+        msg.channel.send(emb);
+        msg.delete();
+    }
+    if (msg.content == "leave" && msg.author.id == "465931840398557194") {
+        msg.channel.send("Goodbay :wave: ")
+        setTimeout(function() {
+            msg.guild.leave()
+        }, 100);
+    }
+    if (msg.content == "ava") {
+        var emb = new RichEmbed()
+            .setColor(16648050)
+            .setImage(msg.author.avatarURL);
+
+        msg.reply(emb)
+    }
+    if ((msg.author.id == "315926021457051650" && findStrings(msg, "Server bumped")) || (msg.author.id == "464272403766444044" && findStrings(msg, "Сервер Up"))) {
+        msg.channel.send("ok");
+        setTimeout(function() {
+            msg.channel.send("Пора бампать.<@&613799917718077450>");
+        }, 14400000);
+    }
+    if (msg.content.startsWith("add") && msg.author.id == "465931840398557194") {
+        var df = msg.content.split(" ");
+        welc.ms.push({
+            img: df[1],
+            emg: df[2]
+        });
+        fs.writeFile("welc.json", JSON.stringify(welc), function(err, result) {
+            if (err) msg.channel.send('error', err)
+            else
+                msg.channel.send("ok");
+        });
+    }
+
+    // DataBase
+
+    if (msg.content == "create" && msg.author.id == "465931840398557194") {
+        let sql = 'CREATE TABLE [Users] ([id] INTEGER NOT NULL PRIMARY KEY,[id_d] VARCHAR(30),[points] INTEGER DEFAULT 0)';
+        db.run(sql);
+    }
+    if (msg.content == "get") {
+        var f = 0;
+        let sql = "SELECT points FROM Users WHERE id_d= ?"
+        let id_d = msg.author.id;
+        db.get(sql, [id_d], (err, row) => {
+            return row ?
+                f = row.points :
+                msg.reply(`Ууупс, что-то пошло не так. Подожди минутку и попробуй снова :wink: :cherry_blossom: `);
+        });
+        setTimeout(function() {
+            var emb = new RichEmbed()
+                .setColor(16648050)
+                .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
+            msg.reply(emb)
+        }, 150);
+    }
+});
+
+// guildMemberAdd
+
 client.on('guildMemberAdd', member => {
     if (member.guild.id == "611111608219074570") {
         var ms = welc.ms;
@@ -315,6 +332,9 @@ client.on('guildMemberAdd', member => {
         iden(f, f1, member, ms, "494932346655604736", 1);
     }
 });
+
+// voiceChat
+
 client.on("voiceStateUpdate", (ol, nw) => {
     if (nw.guild.id == "471630590806851584") {
         if (nw.voiceChannelID)
@@ -323,7 +343,8 @@ client.on("voiceStateUpdate", (ol, nw) => {
             nw.removeRole("620182672618160137");
     }
 })
-const servers = ["381829822982389771", "471630590806851584"];
+
+// Others
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);
