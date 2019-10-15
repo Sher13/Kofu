@@ -199,8 +199,7 @@ client.on("message", (msg) => {
         var emb = new RichEmbed()
             .setColor(16648050)
             .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
-        msg.reply(emb)
-        });
+        msg.reply(emb);
 		}
     }
     if (msg.content == "ava") {
