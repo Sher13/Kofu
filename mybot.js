@@ -306,7 +306,7 @@ client.on("message", (msg) => {
 				"[:cherry_blossom:](https://docs.google.com/spreadsheets/d/e/2PACX-1vStDICXS9U_wVcCt3YNecXgXUQtr4A9CWqgUauXMlm52_L8mIbnzXaIYs0sYHH0vatZn2bHZufF_FVr/pubhtml?gid=2143740747&single=true) Расписание\n")
 		   .addField("**_____________**",
 				"[АиСД](http://neerc.ifmo.ru/teaching/algo/year2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/1q4hb8ZT2XIaUZCylGfglgBkYA1qb9YsVsVJsm6-e0Yw/edit#gid=0)\n" +
-				"[ДМ/дз](http://neerc.ifmo.ru/wiki/index.php?title=%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BF%D0%BE_%D0%94%D0%9C_2019_%D0%BE%D1%81%D0%B5%D0%BD%D1%8C) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQTkyRPeVNCseXvdQ2ct1ZZ0NJw8temN883lXdpoNeMW0KjCkJYBr0CurZneCj2ldq_7b-tzXuWo8qE/pubhtml) \n")
+				"[ДМ](https://neerc.ifmo.ru/~sta/2019-2020/1-discrete-math/) :cherry_blossom: [дз](http://neerc.ifmo.ru/wiki/index.php?title=%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BF%D0%BE_%D0%94%D0%9C_2019_%D0%BE%D1%81%D0%B5%D0%BD%D1%8C) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQTkyRPeVNCseXvdQ2ct1ZZ0NJw8temN883lXdpoNeMW0KjCkJYBr0CurZneCj2ldq_7b-tzXuWo8qE/pubhtml) \n")
 		   .addField("**_____________**",
 				"[Прога](http://www.kgeorgiy.info//courses/prog-intro/) :cherry_blossom: [Тесты](http://www.kgeorgiy.info/git/geo/prog-intro-2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ52PnrWGnJHzy-KAde38XDw_EoEVBzAfAnHYVb_2Mr0x1LXGwgdXZNuNoA-YO01CA96MGbwu5BhSCL/pubhtml?gid=2006076710&single=true)\n" +
 				"[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1EGAy2292joJBGQtA6ctgDpX7JW0TsHOMMor3FUzN_AU/edit#gid=1255137594) МатАн\n" +
