@@ -8,12 +8,20 @@ const fs = require("fs");
 const welc = require('./welc.json');
 const config = require('./config.json');
 const sqlite3 = require('sqlite3').verbose();
+const Music = require('./music.js');
+var search = require('youtube-search');
+const ytdl = require('ytdl-core');
 
 // Const
 
 let db = new sqlite3.Database('db/users.db');
 var v = config.vs;
 const servers = ["381829822982389771", "471630590806851584"];
+var q = new Object;
+var d = new Object;
+q.m = new Map();
+d.m = new Map();
+var mus = new Music(q, d, client);
 
 client.on("ready", () => {
     console.log("I am ready!");
@@ -89,7 +97,7 @@ function say(msg) {
         text = text.substring(p1 + 1);
         client.channels.get(ch_id).send(text);
         msg.delete();
-    } catch  {
+    } catch {
         msg.reply("**ERROR!!**");
     }
 }
@@ -121,7 +129,7 @@ function pick(msg) {
         msg.delete();
     } catch (er) {
         msg.reply("**ERROR!!**");
-		console.log(er);
+        console.log(er);
     }
 }
 
@@ -230,7 +238,7 @@ client.on("message", (msg) => {
             if (e[i].roles.has(role)) {
                 try {
                     e[i].setNickname(s)
-                } catch  {
+                } catch {
                     msg.channel.send("Error");
                 };
             }
@@ -289,31 +297,32 @@ client.on("message", (msg) => {
                 msg.channel.send("ok");
         });
     }
-	if (msg.content == "link") {
-		let emb = new RichEmbed()
-			.setColor(14614685)
-			.setTitle("Links")
-			.addField("**_____________**",
-				"[:cherry_blossom:](https://icpc-neerc.atlassian.net/wiki/spaces/2019/pages/293634127) Волонтерство (инфа)\n" +
-				"[:cherry_blossom:](https://neerc.ifmo.ru/volunteers/year/6) Волонтерство (распределение)\n" +
-				"[:cherry_blossom:](https://beautifier.io/) CodeStyle (JS)\n" +
-				"[:cherry_blossom:](http://format.krzaq.cc/) CodeStyle (C++)\n" +
-				"[:cherry_blossom:](http://detexify.kirelabs.org/classify.html) Latex (символы)\n" +
-				"[:cherry_blossom:](https://telegra.ph/STEP-Internship-Impressions-08-05) Стажировка (текст) \n")
-		    .addField("**_____________**",
-				"[:cherry_blossom:](https://careers.google.com/jobs/results/129125924734935750-student-training-in-engineering-program-step-2020/?category=DATA_CENTER_OPERATIONS&category=DEVELOPER_RELATIONS&category=HARDWARE_ENGINEERING&category=INFORMATION_TECHNOLOGY&category=MANUFACTURING_SUPPLY_CHAIN&category=NETWORK_ENGINEERING&category=PRODUCT_MANAGEMENT&category=PROGRAM_MANAGEMENT&category=SOFTWARE_ENGINEERING&category=TECHNICAL_INFRASTRUCTURE_ENGINEERING&category=TECHNICAL_SOLUTIONS&category=TECHNICAL_WRITING&category=USER_EXPERIENCE&company=Google&company=YouTube&employment_type=INTERN&jex=ENTRY_LEVEL) Стажировка (Стэп) \n" + 
-				"[:cherry_blossom:](https://www.cambridgelms.org/main/p/splash) English \n" +
-				"[:cherry_blossom:](https://docs.google.com/spreadsheets/d/e/2PACX-1vStDICXS9U_wVcCt3YNecXgXUQtr4A9CWqgUauXMlm52_L8mIbnzXaIYs0sYHH0vatZn2bHZufF_FVr/pubhtml?gid=2143740747&single=true) Расписание\n")
-		   .addField("**_____________**",
-				"[АиСД](http://neerc.ifmo.ru/teaching/algo/year2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/1q4hb8ZT2XIaUZCylGfglgBkYA1qb9YsVsVJsm6-e0Yw/edit#gid=0)\n" +
-				"[ДМ](https://neerc.ifmo.ru/~sta/2019-2020/1-discrete-math/) :cherry_blossom: [дз](http://neerc.ifmo.ru/wiki/index.php?title=%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BF%D0%BE_%D0%94%D0%9C_2019_%D0%BE%D1%81%D0%B5%D0%BD%D1%8C) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQTkyRPeVNCseXvdQ2ct1ZZ0NJw8temN883lXdpoNeMW0KjCkJYBr0CurZneCj2ldq_7b-tzXuWo8qE/pubhtml) \n")
-		   .addField("**_____________**",
-				"[Прога](http://www.kgeorgiy.info//courses/prog-intro/) :cherry_blossom: [Тесты](http://www.kgeorgiy.info/git/geo/prog-intro-2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ52PnrWGnJHzy-KAde38XDw_EoEVBzAfAnHYVb_2Mr0x1LXGwgdXZNuNoA-YO01CA96MGbwu5BhSCL/pubhtml?gid=2006076710&single=true)\n" +
-				"[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1EGAy2292joJBGQtA6ctgDpX7JW0TsHOMMor3FUzN_AU/edit#gid=1255137594) МатАн\n" +
-				"[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1elm_qHxMrXZyE5JvmNjAz7iIruHlV2XYVsglm0DkAnI/htmlview) ЛинАл\n" 				
-			)
-		msg.channel.send(emb);
-	}
+    if (msg.content == "link") {
+        let emb = new RichEmbed()
+            .setColor(14614685)
+            .setTitle("Links")
+            .addField("**_____________**",
+                "[:cherry_blossom:](https://icpc-neerc.atlassian.net/wiki/spaces/2019/pages/293634127) Волонтерство (инфа)\n" +
+                "[:cherry_blossom:](https://neerc.ifmo.ru/volunteers/year/6) Волонтерство (распределение)\n" +
+                "[:cherry_blossom:](https://beautifier.io/) CodeStyle (JS)\n" +
+                "[:cherry_blossom:](http://format.krzaq.cc/) CodeStyle (C++)\n" +
+                "[:cherry_blossom:](http://detexify.kirelabs.org/classify.html) Latex (символы)\n" +
+                "[:cherry_blossom:](https://telegra.ph/STEP-Internship-Impressions-08-05) Стажировка (текст) \n")
+            .addField("**_____________**",
+                "[:cherry_blossom:](https://careers.google.com/jobs/results/129125924734935750-student-training-in-engineering-program-step-2020/?category=DATA_CENTER_OPERATIONS&category=DEVELOPER_RELATIONS&category=HARDWARE_ENGINEERING&category=INFORMATION_TECHNOLOGY&category=MANUFACTURING_SUPPLY_CHAIN&category=NETWORK_ENGINEERING&category=PRODUCT_MANAGEMENT&category=PROGRAM_MANAGEMENT&category=SOFTWARE_ENGINEERING&category=TECHNICAL_INFRASTRUCTURE_ENGINEERING&category=TECHNICAL_SOLUTIONS&category=TECHNICAL_WRITING&category=USER_EXPERIENCE&company=Google&company=YouTube&employment_type=INTERN&jex=ENTRY_LEVEL) Стажировка (Стэп) \n" +
+                "[:cherry_blossom:](https://www.cambridgelms.org/main/p/splash) English \n" +
+                "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/e/2PACX-1vStDICXS9U_wVcCt3YNecXgXUQtr4A9CWqgUauXMlm52_L8mIbnzXaIYs0sYHH0vatZn2bHZufF_FVr/pubhtml?gid=2143740747&single=true) Расписание\n")
+            .addField("**_____________**",
+                "[АиСД](http://neerc.ifmo.ru/teaching/algo/year2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/1q4hb8ZT2XIaUZCylGfglgBkYA1qb9YsVsVJsm6-e0Yw/edit#gid=0)\n" +
+                "[ДМ](https://neerc.ifmo.ru/~sta/2019-2020/1-discrete-math/) :cherry_blossom: [дз](http://neerc.ifmo.ru/wiki/index.php?title=%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9_%D0%BF%D0%BE_%D0%94%D0%9C_2019_%D0%BE%D1%81%D0%B5%D0%BD%D1%8C) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQTkyRPeVNCseXvdQ2ct1ZZ0NJw8temN883lXdpoNeMW0KjCkJYBr0CurZneCj2ldq_7b-tzXuWo8qE/pubhtml) \n")
+            .addField("**_____________**",
+                "[Прога](http://www.kgeorgiy.info//courses/prog-intro/) :cherry_blossom: [Тесты](http://www.kgeorgiy.info/git/geo/prog-intro-2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ52PnrWGnJHzy-KAde38XDw_EoEVBzAfAnHYVb_2Mr0x1LXGwgdXZNuNoA-YO01CA96MGbwu5BhSCL/pubhtml?gid=2006076710&single=true)\n" +
+                "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1EGAy2292joJBGQtA6ctgDpX7JW0TsHOMMor3FUzN_AU/edit#gid=1255137594) МатАн\n" +
+                "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1elm_qHxMrXZyE5JvmNjAz7iIruHlV2XYVsglm0DkAnI/htmlview) ЛинАл\n"
+            )
+        msg.channel.send(emb);
+    }
+
     // DataBase
 
     if (msg.content == "create" && msg.author.id == "465931840398557194") {
@@ -335,6 +344,37 @@ client.on("message", (msg) => {
                 .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
             msg.reply(emb)
         }, 150);
+    }
+
+    // Music
+
+    var sq = q.m.get(msg.guild.id);
+    if (msg.content.startsWith(`${config.prefix}play`) || msg.content.startsWith(`${config.prefix}p `))
+        mus.add_m(msg, sq);
+    if (msg.content == `${config.prefix}np`)
+        mus.np(msg, sq);
+    if (msg.content == `${config.prefix}pause`)
+        mus.pause(msg, sq);
+    if (msg.content == `${config.prefix}end` || msg.content == `${config.prefix}leave`)
+        mus.end(msg, sq);
+    if (msg.content == `${config.prefix}queue` || msg.content == `${config.prefix}q`)
+        mus.get_q(msg, sq);
+    if (msg.content == `${config.prefix}skip` || msg.content == `${config.prefix}s`)
+        mus.skip(msg, sq);
+    if (msg.content == `${config.prefix}resume` || msg.content == `${config.prefix}r`)
+        mus.resume(msg, sq);
+    if (msg.content == `${config.prefix}help`) {
+        let embed = new Discord.RichEmbed()
+            .setColor(14614685)
+            .setTitle("Music")
+            .addField(":cherry_blossom: `play` or `p`", "Play url or search a video on youtube.")
+            .addField(":cherry_blossom: `np`", "Shows what is playing right now.")
+            .addField(":cherry_blossom: `queue` or `q`", "Shows the queue.")
+            .addField(":cherry_blossom: `skip` or `s`", "Skips the currently playing song.")
+            .addField(":cherry_blossom: `pause`", "Pause the currently playing song.")
+            .addField(":cherry_blossom: `resume` or `r`", "Resume the paused song.")
+            .addField(":cherry_blossom: `end` or `leave`", "Stop listening to music.")
+        msg.channel.send(embed);
     }
 });
 
