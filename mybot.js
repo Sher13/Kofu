@@ -364,7 +364,7 @@ client.on("message", (msg) => {
     if (msg.content == `${config.prefix}resume` || msg.content == `${config.prefix}r`)
         mus.resume(msg, sq);
     if (msg.content == `${config.prefix}help`) {
-        let embed = new Discord.RichEmbed()
+        let embed = new RichEmbed()
             .setColor(14614685)
             .setTitle("Music")
             .addField(":cherry_blossom: `play` or `p`", "Play url or search a video on youtube.")
