@@ -55,8 +55,9 @@ function shuffle(v) {
 function changeColor() {
     var value = getRandom(0, 16777216);
     var color = '#' + value.toString(16);
+	var role = config.roleName;
     for (let index = 0; index < servers.length; index++) {
-        client.guilds.get(servers[index]).roles.find('name', config.roleName).setColor(color);
+        client.guilds.get(servers[index]).roles.find('id', role[index]).setColor(color);
     }
     var channel = client.channels.get("535391187411140608");
     var emb = {

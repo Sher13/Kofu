@@ -1,6 +1,5 @@
 {
-    "servers": ["471630590806851584"],
-    "roleName": "Rainbow",
+    "roleName": ["606924106025402408", "522868753273192467"],
     "colors": 40,
     "speed": 100000,
     "logging": true,
