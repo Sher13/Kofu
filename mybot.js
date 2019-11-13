@@ -273,13 +273,21 @@ client.on("message", (msg) => {
             msg.guild.leave()
         }, 100);
     }
-    if (msg.content == "ava") {
-        var emb = new RichEmbed()
-            .setColor(16648050)
+    if (msg.content.startsWith('ava')) {
+		var emb;
+		var s = msg.content;
+		if (s.indexOf(' ')+4 < s.length) {
+		var id = s.substring(s.indexOf(' ')+4,s.length-1);
+		var us = client.users.get(id);
+		emb = new RichEmbed()
+            .setImage(us.avatarURL);
+		} else {
+			emb = new RichEmbed()
             .setImage(msg.author.avatarURL);
-
+		}
         msg.reply(emb)
-    }
+	}
+    
     if ((msg.author.id == "315926021457051650" && findStrings(msg, "Server bumped")) || (msg.author.id == "464272403766444044" && findStrings(msg, "Сервер Up"))) {
         msg.channel.send("ok");
         setTimeout(function() {
