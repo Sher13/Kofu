@@ -276,12 +276,10 @@ client.on("message", (msg) => {
     if (msg.content.startsWith('ava')) {
 		var emb;
 		var s = msg.content;
-		console.log(s);
-		if (s.indexOf(' ')+3 < s.length) {
+		if (s.indexOf(' ') != -1 && s.indexOf(' ')+3 < s.length) {
 		var id = s.substring(s.indexOf(' ')+3,s.length-1);
 		while (id.charAt(0) < '0' || id.charAt(0) > '9')
 			id = id.substring(1);
-		console.log(id);
 		var us = client.users.get(id);
 		emb = new RichEmbed()
             .setImage(us.avatarURL);
