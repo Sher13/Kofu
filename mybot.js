@@ -334,6 +334,12 @@ client.on("message", (msg) => {
         msg.channel.send(emb);
     }
 
+	if (msg.content.toLowerCase().indexOf("смерт") != -1 || msg.content.toLowerCase().indexOf("тлен") != -1) {
+		var citat = config.citat;
+		var rd = Math.round(Math.random() * citat.length);
+		msg.channel.send(citat[rd]);
+	}
+
     // DataBase
 
     if (msg.content == "create" && msg.author.id == "465931840398557194") {
