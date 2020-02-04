@@ -334,7 +334,7 @@ client.on("message", (msg) => {
         msg.channel.send(emb);
     }
 
-	if (msg.content.toLowerCase().indexOf("смерт") != -1 || msg.content.toLowerCase().indexOf("тлен") != -1) {
+	if (msg.author.id != "519186885331910676" && (msg.content.toLowerCase().indexOf("смерт") != -1 || msg.content.toLowerCase().indexOf("тлен") != -1)) {
 		var citat = config.citat;
 		var rd = Math.round(Math.random() * citat.length);
 		msg.channel.send(citat[rd]);
