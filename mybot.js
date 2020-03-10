@@ -329,15 +329,37 @@ client.on("message", (msg) => {
             .addField("‎",
                 "[Прога](http://www.kgeorgiy.info//courses/prog-intro/) :cherry_blossom: [Тесты](http://www.kgeorgiy.info/git/geo/prog-intro-2019/) :cherry_blossom: [Баллы](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ52PnrWGnJHzy-KAde38XDw_EoEVBzAfAnHYVb_2Mr0x1LXGwgdXZNuNoA-YO01CA96MGbwu5BhSCL/pubhtml?gid=1513769318)\n" +
                 "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1EGAy2292joJBGQtA6ctgDpX7JW0TsHOMMor3FUzN_AU/edit#gid=1255137594) МатАн\n" +
-                "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/1elm_qHxMrXZyE5JvmNjAz7iIruHlV2XYVsglm0DkAnI/htmlview) ЛинАл\n"
+                "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/13zY5hJwF6AXrTRQTKcauzaOMQdilpLLcHEH6EMkOjNk/edit#gid=0) ЛинАл\n"
             )
         msg.channel.send(emb);
     }
 
-	if (msg.author.id != "519186885331910676" && (msg.content.toLowerCase().indexOf("смерт") != -1 || msg.content.toLowerCase().indexOf("тлен") != -1)) {
+	if (msg.author.id != "519186885331910676" && (msg.content.toLowerCase().indexOf("смерт") != -1)) {
 		var citat = config.citat;
 		var rd = Math.round(Math.random() * citat.length);
 		msg.channel.send(citat[rd]);
+	}
+
+	if (msg.guild.id == "622954155077533696") {
+		var m = msg.content;
+		var fl = 0;
+		if (msg.content.startsWith('qt')) {
+			m = msg.content.substring(3, msg.content.length);
+			fl = 1;
+		}
+		var rd = rand_word(m);
+		var b = [];
+		var versh = config.versh;
+		for (var i = 0; i < versh.length; i++) 
+			if (versh[i].includes(rd))
+				b.push(versh[i]);
+		if (b.length != 0 && (getRandom(0, 1000) = 13 || fl == 1)) {
+			var t = getRandom(0, b.length);
+			msg.channel.send("```"+getStrof(b[t], rd)+"```");
+		}
+		if (fl == 1 && b.length == 0) {
+			msg.reply("Извини, у меня нет стихотворений с таким словом:(");
+		}
 	}
 
     // DataBase
