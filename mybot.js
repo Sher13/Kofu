@@ -198,6 +198,53 @@ function iden(f, f1, member, ms, role, kl) {
     }
 }
 
+function isDigit(s) {
+	if (s.charCodeAt(0) >= 97 && s.charCodeAt(0) <= 122)
+		return true;
+	if (s.charCodeAt(0) >= 1072 && s.charCodeAt(0) <= 1103)
+		return true;
+	return false;
+}
+
+function rand_word(s) {
+	var a = [];
+	s.toLowerCase();
+	while (s.length > 0) {
+		while(s.length > 0 && !isDigit(s.charAt(0))) {
+			s = s.substr(1,s.length-1);
+		}
+		var z = "";
+		var i = 0;
+		if (s.length == 0)
+			break;
+		while(i < s.length && isDigit(s.charAt(i))) {
+			z = z + s.charAt(i);
+			i++;
+		}
+		if (z != "")
+			a.push(z);
+		s = s.substring(i, s.length);
+	}
+	var e = getRandom(0, a.length);
+	return a[e];
+}
+
+function getStrof(s, w) {
+	var y = s.indexOf(w);
+	var ans = "";
+	var i = y;
+	while(i < s.length && s.charAt(i) != '.' && s.charAt(i) != '?' && s.charAt(i) != '!') {
+		ans += s.charAt(i);
+		i++;
+	}
+	i = y-1;
+	while(i >= 0 && s.charAt(i) != '.' && s.charAt(i) != '?' && s.charAt(i) != '!') {
+		ans = s.charAt(i) + ans;
+		i--;
+	}
+	return ans;
+}
+
 // DataBase
 
 function newUsers(v) {
