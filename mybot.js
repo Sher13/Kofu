@@ -400,7 +400,7 @@ client.on("message", (msg) => {
 		for (var i = 0; i < versh.length; i++) 
 			if (versh[i].includes(rd))
 				b.push(versh[i]);
-		if (b.length != 0 && (getRandom(0, 1000) == 13 || fl == 1)) {
+		if (b.length != 0 && (getRandom(0, 50) == 13 || fl == 1)) {
 			var t = getRandom(0, b.length);
 			msg.channel.send("```"+getStrof(b[t], rd)+"```");
 		}
