@@ -387,7 +387,7 @@ client.on("message", (msg) => {
 		msg.channel.send(citat[rd]);
 	}
 
-	if (msg.guild.id == "622954155077533696" || msg.author.id == "465931840398557194") {
+	if ((msg.guild.id == "622954155077533696" || msg.author.id == "465931840398557194") && msg.author.id != "519186885331910676") {
 		var m = msg.content;
 		var fl = 0;
 		if (msg.content.startsWith('qt')) {
@@ -400,7 +400,7 @@ client.on("message", (msg) => {
 		for (var i = 0; i < versh.length; i++) 
 			if (versh[i].includes(rd))
 				b.push(versh[i]);
-		if (b.length != 0 && (getRandom(0, 50) == 13 || fl == 1)) {
+		if (b.length != 0 && (fl == 1 || getRandom(0, 50) == 13)) {
 			var t = getRandom(0, b.length);
 			msg.channel.send("```"+getStrof(b[t], rd)+"```");
 		}
