@@ -198,6 +198,21 @@ function iden(f, f1, member, ms, role, kl) {
     }
 }
 
+function lowerCase(s) {
+	var s1 = "";
+	for (var i = 0; i < s.length; i++) {
+		if (s.charCodeAt(i) == 1025) {
+			s1 += "е";
+			continue;
+		} else if (s.charCodeAt(i) >= 1040 && s.charCodeAt(i) <= 1071) {
+			s1 += String.fromCharCode(s.charCodeAt(i)+32);
+			continue;
+		} else
+			s1 += s.charAt(i);
+	}
+	return s1;
+}
+
 function isDigit(s) {
 	if (s.charCodeAt(0) >= 97 && s.charCodeAt(0) <= 122)
 		return true;
@@ -208,7 +223,7 @@ function isDigit(s) {
 
 function rand_word(s) {
 	var a = [];
-	s.toLowerCase();
+	s = lowerCase(s);
 	while (s.length > 0) {
 		while(s.length > 0 && !isDigit(s.charAt(0))) {
 			s = s.substr(1,s.length-1);
@@ -230,7 +245,7 @@ function rand_word(s) {
 }
 
 function getStrof(s, w) {
-	var y = s.indexOf(w);
+	var y = lowerCase(s).indexOf(w);
 	var ans = "";
 	var i = y;
 	while(i < s.length && s.charAt(i) != '.' && s.charAt(i) != '?' && s.charAt(i) != '!') {
@@ -398,9 +413,9 @@ client.on("message", (msg) => {
 		var b = [];
 		var versh = config.versh;
 		for (var i = 0; i < versh.length; i++) 
-			if (versh[i].includes(rd))
+			if (lowerCase(versh[i]).includes(rd))
 				b.push(versh[i]);
-		if (b.length != 0 && (fl == 1 || getRandom(0, 50) == 13)) {
+		if (b.length != 0 && (getRandom(0, 1000) == 13 || fl == 1)) {
 			var t = getRandom(0, b.length);
 			msg.channel.send("```"+getStrof(b[t], rd)+"```");
 		}
