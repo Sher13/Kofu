@@ -169,9 +169,7 @@ function iden(f, f1, member, ms, role, kl) {
                     if (reaction.emoji.name == ms[nw].emg) {
                         f1.send("<@" + member.id + "> " + "Отлично, выбери <#611883715190194196> и приступай.")
                         clearTimeout(timerId);
-						while(member.roles.get(role) != null) {
-                        	member.addRole(role);
-						}
+                        member.addRole(role)
                         collector.stop();
                     } else {
                         if (kl == 2) {
