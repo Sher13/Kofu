@@ -512,7 +512,7 @@ client.on("voiceStateUpdate", (ol, nw) => {
 // Others
 
 client.on('ready', () => {
-    setInterval(changeColor, config.speed);
+    //setInterval(changeColor, config.speed);
 });
 
 client.login(process.env.TOKEN);
