@@ -558,4 +558,4 @@ client.on('ready', () => {
     setInterval(changeColor, config.speed);
 });
 
-client.login("NTE5MTg2ODg1MzMxOTEwNjc2.XAVYdw.NgEWX8DVlVZ2hXdNDzc8oJlNmjY");
+client.login(process.env.TOKEN);
