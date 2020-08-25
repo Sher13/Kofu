@@ -481,7 +481,7 @@ client.on("message", (msg) => {
         console.log("ok");
     }
 
-    if (msg.author.id == "465931840398557194" && msg.content == "gl") {
+    if (msg.author.id == "465931840398557194" && msg.content == "link") {
         get_text(msg);
     }
     
