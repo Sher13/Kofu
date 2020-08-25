@@ -281,6 +281,33 @@ function addPoint(v) {
     db.run(r);
 }
 
+function get_text(msg) {
+    let sql = "SELECT * FROM Links";
+        db.all(sql,[], (err, rows) => {
+            let emb = new RichEmbed()
+            .setColor(14614685)
+            .setTitle("Links");
+            rows.forEach((row) => {
+               emb.addField("‎", row.text);
+            })
+            msg.channel.send(emb);
+        })
+}
+
+function del_text(msg, id) {
+    let sql = "SELECT * FROM Links";
+        db.all(sql,[], (err, rows) => {
+            id = rows[id].id;
+            sql = "DELETE FROM Links WHERE id = ?";
+            db.run(sql, id, (err) => {
+                if (err) {
+                    return msg.reply("error");
+                }
+                msg.reply("ok");
+            } )
+        })
+}
+
 // Message
 
 client.on("message", (msg) => {
@@ -358,7 +385,7 @@ client.on("message", (msg) => {
             msg.channel.send("Пора бампать.<@&613799917718077450>");
         }, 14400000);
     }
-    if (msg.content.startsWith("add") && msg.author.id == "465931840398557194") {
+    if (msg.content.startsWith("add_") && msg.author.id == "465931840398557194") {
         var df = msg.content.split(" ");
         welc.ms.push({
             img: df[1],
@@ -370,7 +397,7 @@ client.on("message", (msg) => {
                 msg.channel.send("ok");
         });
     }
-    if (msg.content == "link") {
+    /*if (msg.content == "link") {
         let emb = new RichEmbed()
             .setColor(14614685)
             .setTitle("Links")
@@ -394,7 +421,7 @@ client.on("message", (msg) => {
                 "[:cherry_blossom:](https://docs.google.com/spreadsheets/d/13zY5hJwF6AXrTRQTKcauzaOMQdilpLLcHEH6EMkOjNk/edit#gid=0) ЛинАл\n"
             )
         msg.channel.send(emb);
-    }
+    }*/
 
 	if (msg.author.id != "519186885331910676" && (msg.content.toLowerCase().indexOf("смерт") != -1)) {
 		var citat = config.citat;
@@ -427,7 +454,7 @@ client.on("message", (msg) => {
     // DataBase
 
     if (msg.content == "create" && msg.author.id == "465931840398557194") {
-        let sql = 'CREATE TABLE [Users] ([id] INTEGER NOT NULL PRIMARY KEY,[id_d] VARCHAR(30),[points] INTEGER DEFAULT 0)';
+        let sql = 'CREATE TABLE [Links] ([id] INTEGER NOT NULL PRIMARY KEY,[text] VARCHAR(1024))';
         db.run(sql);
     }
     if (msg.content == "get") {
@@ -445,6 +472,22 @@ client.on("message", (msg) => {
                 .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
             msg.reply(emb)
         }, 150);
+    }
+
+    if (msg.author.id == "465931840398557194" && msg.content.startsWith("add")) {
+        var text = msg.content.substring(4);
+        let sql = "INSERT INTO Links(text) VALUES ('" + text + "')";
+        db.run(sql);
+        console.log("ok");
+    }
+
+    if (msg.author.id == "465931840398557194" && msg.content == "gl") {
+        get_text(msg);
+    }
+    
+    if (msg.author.id == "465931840398557194" && msg.content.startsWith("del")) {
+        var id = msg.content.substring(4);
+        del_text(msg, id);
     }
 
     // Music
@@ -515,4 +558,4 @@ client.on('ready', () => {
     setInterval(changeColor, config.speed);
 });
 
-client.login(process.env.TOKEN);
+client.login("NTE5MTg2ODg1MzMxOTEwNjc2.XAVYdw.NgEWX8DVlVZ2hXdNDzc8oJlNmjY");
