@@ -474,11 +474,19 @@ client.on("message", (msg) => {
         }, 150);
     }
 
-    if (msg.author.id == "465931840398557194" && msg.content.startsWith("add")) {
+    if (msg.author.id == "465931840398557194" && msg.content.startsWith("add ")) {
         var text = msg.content.substring(4);
         let sql = "INSERT INTO Links(text) VALUES ('" + text + "')";
-        db.run(sql);
-        console.log("ok");
+        if(text.length > 1024) {
+            msg.reply("too long string");
+        } else {
+            db.run(sql, (err) => {
+                if (err) {
+                    return msg.reply("error");
+                }
+                msg.reply("ok");
+            });
+        }
     }
 
     if (msg.author.id == "465931840398557194" && msg.content == "link") {
