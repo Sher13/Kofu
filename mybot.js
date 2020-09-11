@@ -13,18 +13,18 @@ var search = require('youtube-search');
 const ytdl = require('ytdl-core');
 
 const {Post} = require('pg');
-const db = new Post({
+const dbp = new Post({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 });
 
-db.connect();
+dbp.connect();
 
 // Const
 
-// let db = new sqlite3.Database('db/users.db');
+let db = new sqlite3.Database('db/users.db');
 var v = config.vs;
 const servers = ["381829822982389771", "471630590806851584"];
 var q = new Object;
