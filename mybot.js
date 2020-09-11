@@ -11,16 +11,7 @@ const sqlite3 = require('sqlite3').verbose();
 const Music = require('./music.js');
 var search = require('youtube-search');
 const ytdl = require('ytdl-core');
-const {Post} = require('pg');
 
-const postdb = new Post({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-postdb.connect();
 // Const
 
 let db = new sqlite3.Database('db/users.db');
