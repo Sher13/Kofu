@@ -11,17 +11,16 @@ const sqlite3 = require('sqlite3').verbose();
 const Music = require('./music.js');
 var search = require('youtube-search');
 const ytdl = require('ytdl-core');
-
 const {Post} = require('pg');
-const dbp = new Post({
+
+const postdb = new Post({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 });
 
-dbp.connect();
-
+postdb.connect();
 // Const
 
 let db = new sqlite3.Database('db/users.db');
@@ -274,21 +273,21 @@ function getStrof(s, w) {
 
 function newUsers(v) {
     let sql = "INSERT INTO Users(id_d) VALUES (" + v + ")";
-    db.query(sql);
+    db.run(sql);
 }
 
 function addPoint(v) {
     var f = 2;
     let sql = "SELECT points FROM Users WHERE id_d= ?"
     let id_d = v;
-    db.any(sql, [id_d], (err, row) => {
+    db.get(sql, [id_d], (err, row) => {
         return row ?
             f = 2 :
             newUsers(v);
     });
     f = Math.floor(Math.random() * 5 + 5);
     let r = "UPDATE Users SET points=points+" + f + " WHERE id_d=" + v;
-    db.query(r);
+    db.run(r);
 }
 
 function get_text(msg) {
@@ -306,10 +305,10 @@ function get_text(msg) {
 
 function del_text(msg, id) {
     let sql = "SELECT * FROM Links";
-        db.each(sql,[], (err, rows) => {
+        db.all(sql,[], (err, rows) => {
             id = rows[id].id;
             sql = "DELETE FROM Links WHERE id = ?";
-            db.query(sql, id, (err) => {
+            db.run(sql, id, (err) => {
                 if (err) {
                     return msg.reply("error");
                 }
@@ -465,13 +464,13 @@ client.on("message", (msg) => {
 
     if (msg.content == "create" && msg.author.id == "465931840398557194") {
         let sql = 'CREATE TABLE [Links] ([id] INTEGER NOT NULL PRIMARY KEY,[text] VARCHAR(1024))';
-        db.query(sql);
+        db.run(sql);
     }
     if (msg.content == "get") {
         var f = 0;
         let sql = "SELECT points FROM Users WHERE id_d= ?"
         let id_d = msg.author.id;
-        db.any(sql, [id_d], (err, row) => {
+        db.get(sql, [id_d], (err, row) => {
             return row ?
                 f = row.points :
                 msg.reply(`Ууупс, что-то пошло не так. Подожди минутку и попробуй снова :wink: :cherry_blossom: `);
@@ -490,7 +489,7 @@ client.on("message", (msg) => {
         if(text.length > 1024) {
             msg.reply("too long string");
         } else {
-            db.query(sql, (err) => {
+            db.run(sql, (err) => {
                 if (err) {
                     return msg.reply("error");
                 }
