@@ -20,6 +20,8 @@ const db = new Post({
   }
 });
 
+db.connect();
+
 // Const
 
 // let db = new sqlite3.Database('db/users.db');
@@ -40,7 +42,6 @@ client.on("ready", () => {
         },
         status: 'online'
     })
-    db.connect();
 });
 
 // Just function
