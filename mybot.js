@@ -429,7 +429,7 @@ client.on("message", (msg) => {
 		msg.channel.send(citat[rd]);
 	}
 
-	if ((msg.guild.id == "622954155077533696" || msg.author.id == "465931840398557194") && msg.author.id != "519186885331910676") {
+	if ((msg.guild.id == "622954155077533696" || msg.author.id == "465931840398557194" || msg.content.startsWith('qt')) && msg.author.id != "519186885331910676") {
 		var m = msg.content;
 		var fl = 0;
 		if (msg.content.startsWith('qt')) {
