@@ -587,14 +587,14 @@ client.on("voiceStateUpdate", (ol, nw) => {
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);
-    data = new Date(2023, 8, 12, 0, 0, 0, 0);
-        now = new Date();
-        minus = data-now;
+    let data = new Date(2023, 8, 12, 0, 0, 0, 0);
+    let now = new Date();
+    let minus = data-now;
     function pingPavuk() {
         var cl = client.channels.get("666143344417570816");
         cl.send("<@!617311015591346198> Время вышло!");
     }
-    if (minus > 0) {
+    if (minus > 0 && minus < 2147483645) {
         setTimeout(pingPavuk, minus);
     }
 });
