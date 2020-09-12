@@ -451,6 +451,8 @@ client.on("message", (msg) => {
 		}
 	}
 
+    
+
     // DataBase
 
     if (msg.content == "create" && msg.author.id == "465931840398557194") {
@@ -528,6 +530,27 @@ client.on("message", (msg) => {
             .addField(":cherry_blossom: `end` or `leave`", "Stop listening to music.")
         msg.channel.send(embed);
     }
+    if (msg.content == "when") {
+        data = new Date(2023, 8, 12, 0, 0, 0, 0);
+        now = new Date();
+        minus = data-now;
+        str = " ms";
+        str = (Math.floor(minus % 1000)).toString() + str
+        minus /= 1000;
+        str = (Math.floor(minus % 60)).toString() + " sec " + str;
+        minus /= 60;
+        str = (Math.floor(minus % 60)).toString() + " min " + str;
+        minus /= 60;
+        str = (Math.floor(minus % 24)).toString() + " hour " + str;
+        minus /= 24;
+        str = (Math.floor(minus)).toString() + " day " + str;
+        let num = getRandom(0, 12) + 1;
+        
+        let embed = new RichEmbed()
+            .setTitle('Left to wait')
+            .addField("‎", ":clock" + num.toString() + ": " +str);
+        msg.reply(embed);
+    }
 });
 
 // guildMemberAdd
@@ -564,6 +587,16 @@ client.on("voiceStateUpdate", (ol, nw) => {
 
 client.on('ready', () => {
     setInterval(changeColor, config.speed);
+    data = new Date(2023, 8, 12, 0, 0, 0, 0);
+        now = new Date();
+        minus = data-now;
+    function pingPavuk() {
+        var cl = client.channels.get("666143344417570816");
+        cl.send("<@!617311015591346198> Время вышло!");
+    }
+    if (minus > 0) {
+        setTimeout(pingPavuk, minus);
+    }
 });
 
 client.login(process.env.TOKEN);
