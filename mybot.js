@@ -594,7 +594,7 @@ client.on('ready', () => {
         var cl = client.channels.get("666143344417570816");
         cl.send("<@!617311015591346198> Время вышло!");
     }
-    if (minus > 0 && minus < 2147483645) {
+    if (minus > 0 && minus < 86400000) {
         setTimeout(pingPavuk, minus);
     }
 });
