@@ -1,5 +1,7 @@
 # Kofu
 Simple Discord bot written in JS
+
+If you want to add this bot on your server, please check the [link](https://discord.com/api/oauth2/authorize?client_id=519186885331910676&permissions=8&scope=bot)
 ## Команды
 * `qt string` - Выбирает случайное слово из строки, ищет стихотворение в базе с этим словом и отправляет предложение от точки до точки (база ~ 260 стихотворений)
 * `say ch_id text` - Отправляет в канал с `ch_id` сообщение `text` (only for me^^)
