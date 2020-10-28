@@ -430,23 +430,23 @@ client.on("message", (msg) => {
 	}
 
 	if ((msg.guild.id == "622954155077533696" || msg.author.id == "465931840398557194" || msg.content.startsWith('qt')) && msg.author.id != "519186885331910676") {
-		var m = msg.content;
+		var m = msg.content; // получаем весь текст сообщения
 		var fl = 0;
-		if (msg.content.startsWith('qt')) {
+		if (msg.content.startsWith('qt')) { //если начинается с qt обрежем его и запомним, что так было в fl
 			m = msg.content.substring(3, msg.content.length);
 			fl = 1;
 		}
-		var rd = rand_word(m);
+		var rd = rand_word(m); // достает рандомное слово из строки m
 		var b = [];
-		var versh = config.versh;
-		for (var i = 0; i < versh.length; i++) 
+		var versh = config.versh; // массив всех стихов
+		for (var i = 0; i < versh.length; i++) // находит все стихи, где есть это слово и записывает их в b
 			if (lowerCase(versh[i]).includes(rd))
 				b.push(versh[i]);
-		if (b.length != 0 && (getRandom(0, 50) == 13 || fl == 1)) {
-			var t = getRandom(0, b.length);
-			msg.channel.send("```"+getStrof(b[t], rd)+"```");
+		if (b.length != 0 && (getRandom(0, 50) == 13 || fl == 1)) { // если ести стихи с этим словом и рандом выпадает (или же у нас был запрос qt) отправим стих
+			var t = getRandom(0, b.length); // выберем рандомный стих из b
+			msg.channel.send("```"+getStrof(b[t], rd)+"```"); // вот тут выберем предложение из стиха
 		}
-		if (fl == 1 && b.length == 0) {
+		if (fl == 1 && b.length == 0) { // если был запрос qt и стихотворений нет
 			msg.reply("Извини, у меня нет стихотворений с таким словом:(");
 		}
 	}
