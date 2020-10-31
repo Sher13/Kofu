@@ -476,6 +476,7 @@ client.on("message", (msg) => {
         }, 150);
     }
 
+
     if (msg.author.id == "465931840398557194" && msg.content.startsWith("add ")) {
         var text = msg.content.substring(4);
         let sql = "INSERT INTO Links(text) VALUES ('" + text + "')";
