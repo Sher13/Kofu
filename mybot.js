@@ -492,7 +492,7 @@ client.on("message", (msg) => {
         }
     }
 
-    if (msg.content == "link") {
+    if (msg.content == "link" && msg.author.id == "465931840398557194") {
         get_text(msg);
     }
     
