@@ -531,7 +531,7 @@ client.on("message", (msg) => {
             .addField(":cherry_blossom: `end` or `leave`", "Stop listening to music.")
         msg.channel.send(embed);
     }
-    if (msg.content == "when") {
+    if (msg.content == "доколе") {
         data = new Date(2023, 8, 12, 0, 0, 0, 0);
         now = new Date();
         minus = data-now;
