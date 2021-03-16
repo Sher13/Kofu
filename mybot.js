@@ -9,19 +9,53 @@ const welc = require('./welc.json');
 const config = require('./config.json');
 const sqlite3 = require('sqlite3').verbose();
 const Music = require('./music.js');
-var search = require('youtube-search');
+let search = require('youtube-search');
 const ytdl = require('ytdl-core');
 
 // Const
 
 let db = new sqlite3.Database('db/users.db');
-var v = config.vs;
-const servers = ["381829822982389771", "471630590806851584"];
-var q = new Object;
-var d = new Object;
+let v = config.vs;
+const colorServers = ["381829822982389771", "471630590806851584"];
+const servers = {
+    myServer: {
+        id: "471630590806851584",
+        changeRole: "494465327476899840",
+        colorChannel: "535391187411140608",
+        voiceRole : "620182672618160137"
+    },
+    savaServer: {
+        id: "622954155077533696"
+    },
+    rostikServer: {
+        id: "470179380824506368"
+    },
+    jimmyServer: {
+        id: "381829822982389771"
+    },
+    svetaServers: {
+        id: "611111608219074570"
+    }
+}
+const people = {
+    sher: {
+        id: "465931840398557194"
+    },
+    kofuBot: {
+        id: "519186885331910676"
+    },
+    teaBot: {
+        id: "654810705903484949"
+    },
+    kartusBot: {
+        id: "523116257390886954"
+    }
+}
+let q = {};
+let d = {};
 q.m = new Map();
 d.m = new Map();
-var mus = new Music(q, d, client);
+let mus = new Music(q, d, client);
 
 client.on("ready", () => {
     console.log("I am ready!");
@@ -41,9 +75,9 @@ function getRandom(l, r) {
 }
 
 function shuffle(v) {
-    for (var i = 0; i < v.length; i++) {
-        var e = getRandom(0, v.length);
-        var t = v[e];
+    for (let i = 0; i < v.length; i++) {
+        let e = getRandom(0, v.length);
+        let t = v[e];
         v[e] = v[i];
         v[i] = t;
     }
@@ -53,14 +87,14 @@ function shuffle(v) {
 // Discord function
 
 function changeColor() {
-    var value = getRandom(0, 16777216);
-    var color = '#' + value.toString(16);
-	var role = config.roleName;
-    for (let index = 0; index < servers.length; index++) {
-        client.guilds.get(servers[index]).roles.find('id', role[index]).setColor(color);
+    let value = getRandom(0, 16777216);
+    let color = '#' + value.toString(16);
+    let role = config.roleName;
+    for (let index = 0; index < colorServers.length; index++) {
+        client.guilds.get(colorServers[index]).roles.find('id', role[index]).setColor(color);
     }
-    var channel = client.channels.get("535391187411140608");
-    var emb = {
+    let channel = client.channels.get(servers.myServer.colorChannel);
+    let emb = {
         embed: {
             title: color,
             color: value
@@ -69,32 +103,12 @@ function changeColor() {
     channel.send(emb);
 }
 
-function findStrings(msg, s) {
-    if (msg.embeds[0]) {
-        var emb = msg.embeds[0];
-        if (emb.description && emb.description.includes(s))
-            return true;
-        if (emb.title && emb.title.includes(s))
-            return true;
-        if (emb.author && emb.author.name && emb.author.name.includes(s))
-            return true;
-        for (var i = 0; i < emb.fields.length; i++) {
-            if (emb.fields[i].name.includes(s))
-                return true;
-            if (emb.fields[i].value.includes(s))
-                return true;
-        }
-        return false;
-    } else
-        return false;
-}
-
 function say(msg) {
     try {
-        var p1 = msg.content.indexOf(' ');
-        var text = msg.content.substring(p1 + 1);
+        let p1 = msg.content.indexOf(' ');
+        let text = msg.content.substring(p1 + 1);
         p1 = text.indexOf(' ');
-        var ch_id = text.substring(0, p1);
+        let ch_id = text.substring(0, p1);
         text = text.substring(p1 + 1);
         client.channels.get(ch_id).send(text);
         msg.delete();
@@ -105,15 +119,15 @@ function say(msg) {
 
 function pick(msg) {
     try {
-        var p1 = msg.content.indexOf(' ');
-        var text = msg.content.substring(p1 + 1);
+        let p1 = msg.content.indexOf(' ');
+        let text = msg.content.substring(p1 + 1);
         p1 = text.indexOf(' ');
-        var ch_id = text.substring(0, p1);
+        let ch_id = text.substring(0, p1);
         text = text.substring(p1 + 1);
         p1 = text.indexOf(' ');
-        var m_id = text.substring(0, p1);
+        let m_id = text.substring(0, p1);
         text = text.substring(p1 + 1);
-        var em_id = text;
+        let em_id = text;
         if (text.startsWith('<')) {
             p1 = text.indexOf(':');
             text = text.substring(p1 + 1);
@@ -136,59 +150,59 @@ function pick(msg) {
 
 function iden(f, f1, member, ms, role, kl) {
     if (member) {
-        var nw = getRandom(0, ms.length);
-        var fl = 0;
-        var emb = new RichEmbed()
+        let nw = getRandom(0, ms.length);
+        let fl = 0;
+        let emb = new RichEmbed()
             .setImage(ms[nw].img)
             .setTitle("Кто я? Нажми правильную реакцию:)");
         f.send("<@" + member.id + ">", emb)
             .then(res => {
-                var em = new Array(0);
+                let em = new Array(0);
                 em.push(ms[nw].emg);
-                while (em.length != 5) {
-                    var w = getRandom(0, ms.length);
-                    var fl = 1;
-                    for (var i = 0; i < em.length; i++)
-                        if (em[i] == ms[w].emg)
+                while (em.length !== 5) {
+                    let w = getRandom(0, ms.length);
+                    let fl = 1;
+                    for (let i = 0; i < em.length; i++)
+                        if (em[i] === ms[w].emg)
                             fl = 0;
-                    if (fl == 1)
+                    if (fl === 1)
                         em.push(ms[w].emg);
                 }
                 em = shuffle(em);
-                for (var i = 0; i < em.length; i++)
+                for (let i = 0; i < em.length; i++)
                     res.react(em[i]);
-                const filter = (react, user) => user.id == member.id;
+                const filter = (react, user) => user.id === member.id;
                 const collector = res.createReactionCollector(filter);
-                let timerId = setTimeout(function() {
-                    if (member._roles.length == 0) {
+                let timerId = setTimeout(function () {
+                    if (member._roles.length === 0) {
                         f.send("<@" + member.id + "> " + "Время ожидания истекло. Прощай.");
                         member.kick();
                     }
                 }, 900000);
                 collector.on('collect', (reaction, reactionCollector) => {
-                    if (reaction.emoji.name == ms[nw].emg) {
+                    if (reaction.emoji.name === ms[nw].emg) {
                         f1.send("<@" + member.id + "> " + "Отлично, выбери <#611883715190194196> и приступай.")
                         clearTimeout(timerId);
                         member.addRole(role)
                         collector.stop();
                     } else {
-                        if (kl == 2) {
+                        if (kl === 2) {
                             f.send("К сожалению, ты ошибся. Осталась одна попытка.");
                             collector.stop();
                             clearTimeout(timerId);
                             iden(f, f1, member, ms, role, kl + 1);
                         }
-                        if (kl == 1) {
+                        if (kl === 1) {
                             f.send("К сожалению, ты ошибся. У тебя есть еще 2 попытки.");
                             collector.stop();
                             clearTimeout(timerId);
                             iden(f, f1, member, ms, role, kl + 1);
                         }
-                        if (kl == 3) {
+                        if (kl === 3) {
                             f.send("К сожалению, ты ошибся. Прощай");
                             collector.stop();
                             clearTimeout(timerId);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 member.kick()
                             }, 10000);
                         }
@@ -199,65 +213,62 @@ function iden(f, f1, member, ms, role, kl) {
 }
 
 function lowerCase(s) {
-	var s1 = "";
-	for (var i = 0; i < s.length; i++) {
-		if (s.charCodeAt(i) == 1025) {
-			s1 += "е";
-			continue;
-		} else if (s.charCodeAt(i) >= 1040 && s.charCodeAt(i) <= 1071) {
-			s1 += String.fromCharCode(s.charCodeAt(i)+32);
-			continue;
-		} else
-			s1 += s.charAt(i);
-	}
-	return s1;
+    let s1 = "";
+    for (let i = 0; i < s.length; i++) {
+        if (s.charCodeAt(i) === 1025) {
+            s1 += "е";
+        } else if (s.charCodeAt(i) >= 1040 && s.charCodeAt(i) <= 1071) {
+            s1 += String.fromCharCode(s.charCodeAt(i) + 32);
+        } else
+            s1 += s.charAt(i);
+    }
+    return s1;
 }
 
 function isDigit(s) {
-	if (s.charCodeAt(0) >= 97 && s.charCodeAt(0) <= 122)
-		return true;
-	if (s.charCodeAt(0) >= 1072 && s.charCodeAt(0) <= 1103)
-		return true;
-	return false;
+    if (s.charCodeAt(0) >= 97 && s.charCodeAt(0) <= 122)
+        return true;
+    return s.charCodeAt(0) >= 1072 && s.charCodeAt(0) <= 1103;
+
 }
 
 function rand_word(s) {
-	var a = [];
-	s = lowerCase(s);
-	while (s.length > 0) {
-		while(s.length > 0 && !isDigit(s.charAt(0))) {
-			s = s.substr(1,s.length-1);
-		}
-		var z = "";
-		var i = 0;
-		if (s.length == 0)
-			break;
-		while(i < s.length && isDigit(s.charAt(i))) {
-			z = z + s.charAt(i);
-			i++;
-		}
-		if (z != "")
-			a.push(z);
-		s = s.substring(i, s.length);
-	}
-	var e = getRandom(0, a.length);
-	return a[e];
+    let a = [];
+    s = lowerCase(s);
+    while (s.length > 0) {
+        while (s.length > 0 && !isDigit(s.charAt(0))) {
+            s = s.substr(1, s.length - 1);
+        }
+        let z = "";
+        let i = 0;
+        if (s.length === 0)
+            break;
+        while (i < s.length && isDigit(s.charAt(i))) {
+            z = z + s.charAt(i);
+            i++;
+        }
+        if (z !== "")
+            a.push(z);
+        s = s.substring(i, s.length);
+    }
+    let e = getRandom(0, a.length);
+    return a[e];
 }
 
 function getStrof(s, w) {
-	var y = lowerCase(s).indexOf(w);
-	var ans = "";
-	var i = y;
-	while(i < s.length && s.charAt(i) != '.' && s.charAt(i) != '?' && s.charAt(i) != '!') {
-		ans += s.charAt(i);
-		i++;
-	}
-	i = y-1;
-	while(i >= 0 && s.charAt(i) != '.' && s.charAt(i) != '?' && s.charAt(i) != '!') {
-		ans = s.charAt(i) + ans;
-		i--;
-	}
-	return ans;
+    let s1 = lowerCase(s);
+    let ans = "";
+    s1 = s1.replace("  ", " ");
+    let ms = [s1.split("\n\n"), s1.split("\n \n"), s1.split("."),
+        s1.split("?"), s1.split("!"), s1.split(";")];
+    for (let i = 0; i < ms.length; i++) {
+        for (let j = 0; j < ms[i].length; j++) {
+            if (ms[i][j].indexOf(w) !== -1 && (ans === "" || ms[i][j].length < ans.length)) {
+                ans = ms[i][j];
+            }
+        }
+    }
+    return ans;
 }
 
 // DataBase
@@ -268,7 +279,7 @@ function newUsers(v) {
 }
 
 function addPoint(v) {
-    var f = 2;
+    let f = 2;
     let sql = "SELECT points FROM Users WHERE id_d= ?"
     let id_d = v;
     db.get(sql, [id_d], (err, row) => {
@@ -283,29 +294,29 @@ function addPoint(v) {
 
 function get_text(msg) {
     let sql = "SELECT * FROM Links";
-        db.all(sql,[], (err, rows) => {
-            let emb = new RichEmbed()
+    db.all(sql, [], (err, rows) => {
+        let emb = new RichEmbed()
             .setColor(14614685)
             .setTitle("Links");
-            rows.forEach((row) => {
-               emb.addField("‎", row.text);
-            })
-            msg.channel.send(emb);
+        rows.forEach((row) => {
+            emb.addField("‎", row.text);
         })
+        msg.channel.send(emb);
+    })
 }
 
 function del_text(msg, id) {
     let sql = "SELECT * FROM Links";
-        db.all(sql,[], (err, rows) => {
-            id = rows[id].id;
-            sql = "DELETE FROM Links WHERE id = ?";
-            db.run(sql, id, (err) => {
-                if (err) {
-                    return msg.reply("error");
-                }
-                msg.reply("ok");
-            } )
+    db.all(sql, [], (err, rows) => {
+        id = rows[id].id;
+        sql = "DELETE FROM Links WHERE id = ?";
+        db.run(sql, id, (err) => {
+            if (err) {
+                return msg.reply("error");
+            }
+            msg.reply("ok");
         })
+    })
 }
 
 // Message
@@ -314,84 +325,76 @@ client.on("message", (msg) => {
     addPoint(msg.author.id);
     if (msg.content.startsWith("ping"))
         msg.channel.send("pong!");
-    if (msg.content.startsWith("cr") && (msg.author.id == "361571289384747012" || msg.author.id == "465931840398557194")) {
-        var role = "";
-        if (msg.guild.id == "470179380824506368")
-            role = "476520273479335937";
-        if (msg.guild.id == "471630590806851584")
-            role = "494465327476899840";
-        var e = msg.guild.members.array();
-        var s = "";
-        if (msg.content.indexOf(' ') != -1)
+    if (msg.content.startsWith("changeRole") && msg.author.id === people.sher.id) {
+        let role = "";
+        if (msg.guild.id === servers.myServer.id)
+            role = servers.myServer.changeRole;
+        let e = msg.guild.members.array();
+        let s = "";
+        if (msg.content.indexOf(' ') !== -1)
             s = msg.content.substring(msg.content.indexOf(' ') + 1);
-        for (var i = 0; i < e.length; i++) {
+        for (let i = 0; i < e.length; i++) {
             if (e[i].roles.has(role)) {
                 try {
                     e[i].setNickname(s)
                 } catch {
                     msg.channel.send("Error");
-                };
+                }
             }
         }
     }
-    if (msg.content == "ch") {
+    if (msg.content === "ch") {
         changeColor();
         msg.channel.send("ok:ok_hand: :wink: ");
     }
-    if (msg.content.startsWith("say") && msg.author.id == "465931840398557194") {
+    if (msg.content.startsWith("say") && msg.author.id === people.sher.id) {
         say(msg);
     }
-    if (msg.content.startsWith("pick") && msg.author.id == "465931840398557194") {
+    if (msg.content.startsWith("pick") && msg.author.id === people.sher.id) {
         pick(msg);
     }
     if (msg.content.startsWith("hh")) {
         msg.react("➕");
         msg.react("➖");
     }
-    if (msg.content.toLowerCase() == "vi") {
-        var e = Math.round(Math.random() * v.length);
-        var emb = new RichEmbed()
+    if (msg.content.toLowerCase() === "vi") {
+        let e = Math.round(Math.random() * v.length);
+        let emb = new RichEmbed()
             .setColor(16648050)
             .setImage(v[e]);
         msg.channel.send(emb);
         msg.delete();
     }
-    if (msg.content == "leave" && msg.author.id == "465931840398557194") {
+    if (msg.content === "leave" && msg.author.id === people.sher.id) {
         msg.channel.send("Goodbay :wave: ")
-        setTimeout(function() {
+        setTimeout(function () {
             msg.guild.leave()
         }, 100);
     }
     if (msg.content.startsWith('ava')) {
-		var emb;
-		var s = msg.content;
-		if (s.indexOf(' ') != -1 && s.indexOf(' ')+3 < s.length) {
-		var id = s.substring(s.indexOf(' ')+3,s.length-1);
-		while (id.charAt(0) < '0' || id.charAt(0) > '9')
-			id = id.substring(1);
-		var us = client.users.get(id);
-		emb = new RichEmbed()
-            .setImage(us.avatarURL);
-		} else {
-			emb = new RichEmbed()
-            .setImage(msg.author.avatarURL);
-		}
+        let emb;
+        let s = msg.content;
+        if (s.indexOf(' ') !== -1 && s.indexOf(' ') + 3 < s.length) {
+            let id = s.substring(s.indexOf(' ') + 3, s.length - 1);
+            while (id.charAt(0) < '0' || id.charAt(0) > '9')
+                id = id.substring(1);
+            let us = client.users.get(id);
+            emb = new RichEmbed()
+                .setImage(us.avatarURL);
+        } else {
+            emb = new RichEmbed()
+                .setImage(msg.author.avatarURL);
+        }
         msg.reply(emb)
-	}
-    
-    if ((msg.author.id == "315926021457051650" && findStrings(msg, "Server bumped")) || (msg.author.id == "464272403766444044" && findStrings(msg, "Сервер Up"))) {
-        msg.channel.send("ok");
-        setTimeout(function() {
-            msg.channel.send("Пора бампать.<@&613799917718077450>");
-        }, 14400000);
     }
-    if (msg.content.startsWith("add_") && msg.author.id == "465931840398557194") {
-        var df = msg.content.split(" ");
+
+    if (msg.content.startsWith("add_") && msg.author.id === people.sher.id) {
+        let df = msg.content.split(" ");
         welc.ms.push({
             img: df[1],
             emg: df[2]
         });
-        fs.writeFile("welc.json", JSON.stringify(welc), function(err, result) {
+        fs.writeFile("welc.json", JSON.stringify(welc), function (err, result) {
             if (err) msg.channel.send('error', err)
             else
                 msg.channel.send("ok");
@@ -423,44 +426,44 @@ client.on("message", (msg) => {
         msg.channel.send(emb);
     }*/
 
-	if (msg.author.id != "519186885331910676" && msg.author.id != "523116257390886954" && (msg.content.toLowerCase().indexOf("смерт") != -1 || msg.content.toLowerCase().indexOf("суицид") != -1)) {
-		var citat = config.citat;
-		var rd = Math.round(Math.random() * citat.length);
-		msg.channel.send(citat[rd]);
-	}
+    if (msg.author.id !== people.kofuBot.id && msg.author.id !== people.kartusBot.id && msg.author.id !== people.teaBot.id
+        && (msg.content.toLowerCase().indexOf("смерт") !== -1 || msg.content.toLowerCase().indexOf("суицид") !== -1)) {
+        let citat = config.citat;
+        let rd = Math.round(Math.random() * citat.length);
+        msg.channel.send(citat[rd]);
+    }
 
-	if ((msg.guild.id == "622954155077533696" || msg.author.id == "465931840398557194" || msg.content.startsWith('qt')) && msg.author.id != "519186885331910676") {
-		var m = msg.content; // получаем весь текст сообщения
-		var fl = 0;
-		if (msg.content.startsWith('qt')) { //если начинается с qt обрежем его и запомним, что так было в fl
-			m = msg.content.substring(3, msg.content.length);
-			fl = 1;
-		}
-		var rd = rand_word(m); // достает рандомное слово из строки m
-		var b = [];
-		var versh = config.versh; // массив всех стихов
-		for (var i = 0; i < versh.length; i++) // находит все стихи, где есть это слово и записывает их в b
-			if (lowerCase(versh[i]).includes(rd))
-				b.push(versh[i]);
-		if (b.length != 0 && (getRandom(0, 50) == 13 || fl == 1)) { // если ести стихи с этим словом и рандом выпадает (или же у нас был запрос qt) отправим стих
-			var t = getRandom(0, b.length); // выберем рандомный стих из b
-			msg.channel.send("```"+getStrof(b[t], rd)+"```"); // вот тут выберем предложение из стиха
-		}
-		if (fl == 1 && b.length == 0) { // если был запрос qt и стихотворений нет
-			msg.reply("Извини, у меня нет стихотворений с таким словом:(");
-		}
-	}
+    if ((msg.guild.id === servers.savaServer.id || msg.author.id === people.sher.id || msg.content.startsWith('qt')) && msg.author.id !== people.kofuBot.id) {
+        let m = msg.content; // получаем весь текст сообщения
+        let fl = 0;
+        if (msg.content.startsWith('qt')) { //если начинается с qt обрежем его и запомним, что так было в fl
+            m = msg.content.substring(3, msg.content.length);
+            fl = 1;
+        }
+        let rd = rand_word(m); // достает рандомное слово из строки m
+        let b = [];
+        let versh = config.versh; // массив всех стихов
+        for (let i = 0; i < versh.length; i++) // находит все стихи, где есть это слово и записывает их в b
+            if (lowerCase(versh[i]).includes(rd))
+                b.push(versh[i]);
+        if (b.length !== 0 && (getRandom(0, 50) === 13 || fl === 1)) { // если ести стихи с этим словом и рандом выпадает (или же у нас был запрос qt) отправим стих
+            let t = getRandom(0, b.length); // выберем рандомный стих из b
+            msg.channel.send("```" + getStrof(b[t], rd) + "```"); // вот тут выберем предложение из стиха
+        }
+        if (fl === 1 && b.length === 0) {// если был запрос qt и стихотворений нет
+            msg.reply("Извини, у меня нет стихотворений с таким словом:(");
+        }
+    }
 
-    
 
     // DataBase
 
-    if (msg.content == "create" && msg.author.id == "465931840398557194") {
-        let sql = 'CREATE TABLE [Links] ([id] INTEGER NOT NULL PRIMARY KEY,[text] VARCHAR(1024))';
+    if (msg.content === "create" && msg.author.id === people.sher.id) {
+        let sql = 'CREATE TABLE [Links] ([id] INTEGER NOT NULL PRIMARY KEY,[text] letCHAR(1024))';
         db.run(sql);
     }
-    if (msg.content == "get") {
-        var f = 0;
+    if (msg.content === "get") {
+        let f = 0;
         let sql = "SELECT points FROM Users WHERE id_d= ?"
         let id_d = msg.author.id;
         db.get(sql, [id_d], (err, row) => {
@@ -468,8 +471,8 @@ client.on("message", (msg) => {
                 f = row.points :
                 msg.reply(`Ууупс, что-то пошло не так. Подожди минутку и попробуй снова :wink: :cherry_blossom: `);
         });
-        setTimeout(function() {
-            var emb = new RichEmbed()
+        setTimeout(function () {
+            let emb = new RichEmbed()
                 .setColor(16648050)
                 .setDescription("Ваши баллы: " + f + ":cherry_blossom:");
             msg.reply(emb)
@@ -477,10 +480,10 @@ client.on("message", (msg) => {
     }
 
 
-    if (msg.author.id == "465931840398557194" && msg.content.startsWith("add ")) {
-        var text = msg.content.substring(4);
+    if (msg.author.id === people.sher.id && msg.content.startsWith("add ")) {
+        let text = msg.content.substring(4);
         let sql = "INSERT INTO Links(text) VALUES ('" + text + "')";
-        if(text.length > 1024) {
+        if (text.length > 1024) {
             msg.reply("too long string");
         } else {
             db.run(sql, (err) => {
@@ -492,33 +495,33 @@ client.on("message", (msg) => {
         }
     }
 
-    if (msg.content == "link" && msg.author.id == "465931840398557194") {
+    if (msg.content === "link" && msg.author.id === people.sher.id) {
         get_text(msg);
     }
-    
-    if (msg.author.id == "465931840398557194" && msg.content.startsWith("del")) {
-        var id = msg.content.substring(4);
+
+    if (msg.author.id === people.sher.id && msg.content.startsWith("del")) {
+        let id = msg.content.substring(4);
         del_text(msg, id);
     }
 
     // Music
 
-    var sq = q.m.get(msg.guild.id);
+    let sq = q.m.get(msg.guild.id);
     if (msg.content.startsWith(`${config.prefix}play`) || msg.content.startsWith(`${config.prefix}p `))
         mus.add_m(msg, sq);
-    if (msg.content == `${config.prefix}np`)
+    if (msg.content === `${config.prefix}np`)
         mus.np(msg, sq);
-    if (msg.content == `${config.prefix}pause`)
+    if (msg.content === `${config.prefix}pause`)
         mus.pause(msg, sq);
-    if (msg.content == `${config.prefix}end` || msg.content == `${config.prefix}leave`)
+    if (msg.content === `${config.prefix}end` || msg.content === `${config.prefix}leave`)
         mus.end(msg, sq);
-    if (msg.content == `${config.prefix}queue` || msg.content == `${config.prefix}q`)
+    if (msg.content === `${config.prefix}queue` || msg.content === `${config.prefix}q`)
         mus.get_q(msg, sq);
-    if (msg.content == `${config.prefix}skip` || msg.content == `${config.prefix}s`)
+    if (msg.content === `${config.prefix}skip` || msg.content === `${config.prefix}s`)
         mus.skip(msg, sq);
-    if (msg.content == `${config.prefix}resume` || msg.content == `${config.prefix}r`)
+    if (msg.content === `${config.prefix}resume` || msg.content === `${config.prefix}r`)
         mus.resume(msg, sq);
-    if (msg.content == `${config.prefix}help`) {
+    if (msg.content === `${config.prefix}help`) {
         let embed = new RichEmbed()
             .setColor(14614685)
             .setTitle("Music")
@@ -531,10 +534,10 @@ client.on("message", (msg) => {
             .addField(":cherry_blossom: `end` or `leave`", "Stop listening to music.")
         msg.channel.send(embed);
     }
-    if (msg.content == "доколе") {
+    if (msg.content === "доколе") {
         data = new Date(2023, 8, 12, 0, 0, 0, 0);
         now = new Date();
-        minus = data-now;
+        minus = data - now;
         str = " ms";
         str = (Math.floor(minus % 1000)).toString() + str
         minus /= 1000;
@@ -546,10 +549,9 @@ client.on("message", (msg) => {
         minus /= 24;
         str = (Math.floor(minus)).toString() + " day " + str;
         let num = getRandom(0, 12) + 1;
-        
         let embed = new RichEmbed()
             .setTitle('Left to wait')
-            .addField("‎", ":clock" + num.toString() + ": " +str);
+            .addField("‎", ":clock" + num.toString() + ": " + str);
         msg.reply(embed);
     }
 });
@@ -557,18 +559,18 @@ client.on("message", (msg) => {
 // guildMemberAdd
 
 client.on('guildMemberAdd', member => {
-    if (member.guild.id == "611111608219074570") {
-        var ms = welc.ms;
-        var nw = Math.floor(Math.random() * ms.length) % ms.length;
-        var f = client.channels.get("618171844775641088");
-        var f1 = client.channels.get("611111608219074572");
+    if (member.guild.id === servers.svetaServers.id) {
+        let ms = welc.ms;
+        let nw = Math.floor(Math.random() * ms.length) % ms.length;
+        let f = client.channels.get("618171844775641088");
+        let f1 = client.channels.get("611111608219074572");
         iden(f, f1, member, ms, "611251294807654453", 1);
     }
-    if (member.guild.id == "471630590806851584") {
-        var ms = welc.ms;
-        var nw = Math.floor(Math.random() * ms.length) % ms.length;
-        var f = client.channels.get("571749559689019408");
-        var f1 = client.channels.get("619552846328627201");
+    if (member.guild.id === servers.myServer.id) {
+        let ms = welc.ms;
+        let nw = Math.floor(Math.random() * ms.length) % ms.length;
+        let f = client.channels.get("571749559689019408");
+        let f1 = client.channels.get("619552846328627201");
         iden(f, f1, member, ms, "494932346655604736", 1);
     }
 });
@@ -576,11 +578,11 @@ client.on('guildMemberAdd', member => {
 // voiceChat
 
 client.on("voiceStateUpdate", (ol, nw) => {
-    if (nw.guild.id == "471630590806851584") {
+    if (nw.guild.id === servers.myServer.id) {
         if (nw.voiceChannelID)
-            nw.addRole("620182672618160137");
+            nw.addRole(servers.myServer.voiceRole);
         else
-            nw.removeRole("620182672618160137");
+            nw.removeRole(servers.myServer.voiceRole);
     }
 })
 
@@ -590,11 +592,13 @@ client.on('ready', () => {
     setInterval(changeColor, config.speed);
     let data = new Date(2023, 8, 12, 0, 0, 0, 0);
     let now = new Date();
-    let minus = data-now;
+    let minus = data - now;
+
     function pingPavuk() {
-        var cl = client.channels.get("666143344417570816");
+        let cl = client.channels.get("666143344417570816");
         cl.send("<@!617311015591346198> Время вышло!");
     }
+
     if (minus > 0 && minus < 86400000) {
         setTimeout(pingPavuk, minus);
     }
