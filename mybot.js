@@ -33,8 +33,11 @@ const servers = {
     jimmyServer: {
         id: "381829822982389771"
     },
-    svetaServers: {
+    svetaServer: {
         id: "611111608219074570"
+    },
+    nerserServer: {
+        id: "429729565817044992"
     }
 }
 const people = {
@@ -319,6 +322,15 @@ function del_text(msg, id) {
     })
 }
 
+function parseAnswer(msg, user, text) {
+    var members = msg.guild.members;
+    return text.replace("@author",`${members.get(msg.author.id)}`)
+        .replace("@number", getRandom(1000000, 1000000000))
+        .replace("@me", `${members.get(people.kofuBot.id)}`)
+        .replace("@user",`${user}`)
+        .replace("@random", `${members.array()[getRandom(0, members.size)]}`);
+}
+
 // Message
 
 client.on("message", (msg) => {
@@ -554,12 +566,33 @@ client.on("message", (msg) => {
             .addField("‎", ":clock" + num.toString() + ": " + str);
         msg.reply(embed);
     }
+    if ((msg.guild.id == servers.nerserServer.id || msg.guild.id == servers.myServer.id)
+        &&  (msg.content.startsWith("!ban") || msg.content.startsWith("!бан"))) {
+        let s = msg.content;
+        let errorMessage = ["Писать научись и там поговорим",
+        "Может лучше всё же тебя?",
+        "@random его?"];
+        if (s.indexOf(' ') !== -1 && s.indexOf(' ') + 4 < s.length) {
+            let id = s.substring(s.indexOf(' ') + 4, s.length - 1);
+            while (id.charAt(0) < '0' || id.charAt(0) > '9')
+                id = id.substring(1);
+            let us = client.users.get(id);
+            if (us === undefined) {
+                msg.channel.send(parseAnswer(msg, 0, errorMessage[getRandom(0, errorMessage.length)]));
+            } else {
+                let ban = config.ban;
+                msg.channel.send(parseAnswer(msg, us, ban[getRandom(0, ban.length)]));
+            }
+        } else {
+            msg.channel.send(parseAnswer(msg, 0, errorMessage[getRandom(0, errorMessage.length)]));
+        }
+    }
 });
 
 // guildMemberAdd
 
 client.on('guildMemberAdd', member => {
-    if (member.guild.id === servers.svetaServers.id) {
+    if (member.guild.id === servers.svetaServer.id) {
         let ms = welc.ms;
         let nw = Math.floor(Math.random() * ms.length) % ms.length;
         let f = client.channels.get("618171844775641088");
@@ -604,4 +637,4 @@ client.on('ready', () => {
     }
 });
 
-client.login(process.env.TOKEN);
+client.login("NTE5MTg2ODg1MzMxOTEwNjc2.XAVYdw.mcyHeLuhhigsxA3UoUf9QwfCo-w");
