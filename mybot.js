@@ -574,7 +574,7 @@ client.on("message", (msg) => {
         "@random его?"];
         if (s.indexOf(' ') !== -1 && s.indexOf(' ') + 4 < s.length) {
             let id = s.substring(s.indexOf(' ') + 4, s.length - 1);
-            while (id.charAt(0) < '0' || id.charAt(0) > '9')
+            while (id.length > 0 && id.charAt(0) < '0' || id.charAt(0) > '9')
                 id = id.substring(1);
             let us = client.users.get(id);
             if (us === undefined) {
