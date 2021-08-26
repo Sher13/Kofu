@@ -566,7 +566,7 @@ client.on("message", (msg) => {
             .addField("‎", ":clock" + num.toString() + ": " + str);
         msg.reply(embed);
     }
-    if ((msg.guild.id == servers.nerserServer.id || msg.guild.id == savaServer.id || msg.guild.id == servers.myServer.id)
+    if ((msg.guild.id == servers.nerserServer.id || msg.guild.id == servers.savaServer.id || msg.guild.id == servers.myServer.id)
         &&  (msg.content.startsWith("!ban") || msg.content.startsWith("!бан"))) {
         let s = msg.content;
         let errorMessage = ["Писать научись и там поговорим",
