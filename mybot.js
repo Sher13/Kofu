@@ -38,6 +38,9 @@ const servers = {
     },
     nerserServer: {
         id: "429729565817044992"
+    },
+    veresiServer: {
+        id: "884726247182184468"
     }
 }
 const people = {
@@ -445,7 +448,7 @@ client.on("message", (msg) => {
         msg.channel.send(citat[rd]);
     }
 
-    if ((msg.guild.id === servers.savaServer.id || msg.author.id === people.sher.id || msg.content.startsWith('qt')) && msg.author.id !== people.kofuBot.id) {
+    if ((msg.guild.id === servers.savaServer.id || msg.guild.id === servers.veresiServer.id || msg.author.id === people.sher.id || msg.content.startsWith('qt')) && msg.author.id !== people.kofuBot.id) {
         let m = msg.content; // получаем весь текст сообщения
         let fl = 0;
         if (msg.content.startsWith('qt')) { //если начинается с qt обрежем его и запомним, что так было в fl
