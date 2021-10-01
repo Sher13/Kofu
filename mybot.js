@@ -443,7 +443,7 @@ client.on("message", (msg) => {
 
     if (msg.author.id !== people.kofuBot.id && msg.author.id !== people.kartusBot.id && msg.author.id !== people.teaBot.id
         && (msg.content.toLowerCase().indexOf("смерт") !== -1 || msg.content.toLowerCase().indexOf("суицид") !== -1)) {
-        let citat = config.citat;
+        let citat = config.life;
         let rd = Math.round(Math.random() * citat.length);
         msg.channel.send(citat[rd]);
     }
