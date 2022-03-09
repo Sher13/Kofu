@@ -1,29 +1,6 @@
 {
-  "name": "Kofu",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.6.4",
-    "node-datetime": "^2.1.2",
-    "pg": "^8.3.3",
-    "sqlite3": "^4.0.9",
-    "youtube-search": "^1.1.4",
-    "ytdl-core": "^0.29.5"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sher13/Kofu.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Sher13/Kofu/issues"
-  },
-  "homepage": "https://github.com/Sher13/Kofu#readme",
-  "description": ""
+    "discord.js": "^13.6.0",
+    "fs": "^0.0.1-security"
+  }
 }
