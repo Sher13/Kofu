@@ -287,4 +287,4 @@ client.on('ready', () => {
     }
 });
 
-client.login("NTE5MTg2ODg1MzMxOTEwNjc2.XAVYdw.qW8ZgBkSd3mJXEk5gjw9HntPfmM");
+client.login(process.env.TOKEN);
